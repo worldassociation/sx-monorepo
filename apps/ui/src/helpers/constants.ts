@@ -1,6 +1,6 @@
 import { VoteType, VoteTypeInfo } from '@/types';
 
-export const APP_NAME = 'Snapshot';
+export const APP_NAME = 'World Association';
 
 export const SIDEKICK_URL = 'https://sh5.co';
 

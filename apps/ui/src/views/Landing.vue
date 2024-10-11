@@ -1,13 +1,13 @@
 <script setup lang="ts">
-useTitle('Snapshot');
+useTitle('World Association');
 </script>
 
 <template>
   <div class="relative">
     <LandingHero />
     <LandingUsers />
-    <LandingCounter />
     <LandingFlow />
+    <LandingCounter />
     <LandingFeatures />
     <LandingEcosystem />
     <LandingStart />

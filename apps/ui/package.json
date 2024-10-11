@@ -1,10 +1,10 @@
 {
-  "name": "ui",
+  "name": "world-association-ui",
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "main": "main.js",
-  "repository": "snapshot-labs/sx-monorepo",
+  "repository": "blaisekonya/sx-monorepo",
   "scripts": {
     "dev": "vite --port=8080",
     "build": "vite build",

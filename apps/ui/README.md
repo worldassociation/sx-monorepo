@@ -1,8 +1,8 @@
-# Snapshot UI
+# World Association UI
 
-An open source interface for Snapshot and Snapshot X protocols.
+An open source interface for the Snapshot and Snapshot X protocols.
 
-**[Website](https://snapshot.box)**
+**[Website](https://worldassociation.org)**
 
 ## Development guide
 
@@ -14,4 +14,4 @@ file in `./src/networks`.
 
 ## License
 
-Snapshot is open-sourced software licensed under the © [MIT license](LICENSE).
+The World Association UI is open-sourced software licensed under the © [MIT license](LICENSE).

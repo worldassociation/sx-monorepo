@@ -27,7 +27,7 @@ const SOCIALS = [
     <UiContainer class="!max-w-screen-lg space-y-7">
       <div class="grid grid-col-2 md:grid-cols-4 space-y-4 md:space-y-0">
         <div class="space-y-2">
-          <div class="eyebrow">Snapshot</div>
+          <div class="eyebrow">World Association</div>
           <div class="space-y-1">
             <div>
               <AppLink :to="{ name: 'my-explore' }"> Explore spaces </AppLink>
@@ -35,7 +35,7 @@ const SOCIALS = [
             <div>
               <a href="https://snapshot.org/#/setup?step=0" target="_blank">
                 Create a space
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
+                <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
             </div>
             <div>
@@ -51,19 +51,7 @@ const SOCIALS = [
           <div class="space-y-1">
             <div>
               <a href="https://help.snapshot.box" target="_blank">
-                Helpdesk <IH-arrow-sm-right class="inline-block -rotate-45" />
-              </a>
-            </div>
-            <div>
-              <a href="https://snapshot.mirror.xyz" target="_blank">
-                Blog
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
-              </a>
-            </div>
-            <div>
-              <a href="https://github.com/snapshot-labs/brand" target="_blank">
-                Brand
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
+                Helpdesk <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
             </div>
           </div>
@@ -74,25 +62,25 @@ const SOCIALS = [
             <div>
               <a href="https://docs.snapshot.org" target="_blank">
                 Snapshot docs
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
+                <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
             </div>
             <div>
               <a href="https://docs.snapshot.box" target="_blank">
                 Snapshot X docs
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
+                <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
             </div>
             <div>
               <a href="https://github.com/snapshot-labs" target="_blank">
                 GitHub
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
+                <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
             </div>
             <div>
               <a href="https://status.snapshot.org" target="_blank">
                 Status
-                <IH-arrow-sm-right class="inline-block -rotate-45" />
+                <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
             </div>
           </div>
@@ -110,36 +98,23 @@ const SOCIALS = [
           </div>
         </div>
       </div>
-      <div class="flex">
-        <div class="flex-grow">
-          <img
-            src="@/assets/snapshot.svg"
-            alt="Snapshot"
-            class="w-4 inline-block mr-3"
-          />
-          © {{ new Date().getFullYear() }} Snapshot Labs
-          <a
-            :href="`https://github.com/${repository}${COMMIT_SHA && `/tree/${COMMIT_SHA}`}`"
-            target="_blank"
-            class="ml-1.5"
-          >
-            <span
-              v-text="
-                `v${version}${COMMIT_SHA ? `#${COMMIT_SHA.slice(0, 7)}` : ''}`
-              "
-            />
-            <IH-arrow-sm-right class="inline-block -rotate-45 ml-0.5" />
+      <div class="flex max-sm:flex-col max-sm:space-y-5">
+        <div class="flex-grow flex items-center">
+          <div
+            class="box-border sm:mb-[3px] h-[30px] w-[30px] mr-3 inline-block rounded-full border-[5px] border-skin-primary">
+          </div>
+          © {{ new Date().getFullYear() }} World Association
+          <a :href="`https://github.com/${repository}${COMMIT_SHA && `/tree/${COMMIT_SHA}`}`" target="_blank"
+            class="ml-1.5">
+            <span v-text="`v${version}${COMMIT_SHA ? `#${COMMIT_SHA.slice(0, 7)}` : ''}`
+              " />
+            <IH-arrow-sm-right class="inline-block -rotate-45 ml-0.5 mb-0.5" />
           </a>
         </div>
-        <div class="flex space-x-2.5">
-          <a
-            v-for="social in SOCIALS"
-            :key="social.href"
-            :href="social.href"
-            target="_blank"
-            class="text-[#606060] hover:text-skin-link"
-          >
-            <component :is="social.icon" class="size-[32px] text-skin-link" />
+        <div class="flex space-x-3">
+          <a v-for="social in SOCIALS" :key="social.href" :href="social.href" target="_blank"
+            class="text-[#606060] hover:text-skin-link">
+            <component :is="social.icon" class="size-[28px] text-skin-link" />
           </a>
         </div>
       </div>
