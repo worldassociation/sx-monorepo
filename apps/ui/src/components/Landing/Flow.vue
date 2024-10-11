@@ -8,36 +8,39 @@ const STEPS = [
   {
     title: 'Discuss',
     about:
-      "Stay up-to-date with conversations on global issues directly within the app with our Discourse integration. Participate in debates and refine ideas before they become polls, petitions, or proposals.",
+      "Stay up-to-date with conversations, participate in debates, and refine ideas on global issues directly within the World Association app.",
     icon: ICAnnotation
   },
   {
     title: 'Delegate',
     about:
-      'Amplify your impact by becoming a delegate or choose one to represent your interests. Track delegate performance, read their statements, and make decisions about the governance of the World Association.',
+      'Increase your impact by becoming a delegate or choose one to represent your interests. Read delegate statements and continuously track their performance.',
     icon: ISLightningBolt
   },
   {
     title: 'Vote',
     about:
-      "Shape the future of humanity with ease. Create proposals, polls, and petitions and cast votes through our intuitive interface. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.",
+      "Create proposals and cast votes through our intuitive interface. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.",
     icon: ISCheck
   },
   {
     title: 'Execute',
     about:
-      'Watch decisions transform into action or execute them yourself. After a proposal passes, changes are seamlessly implemented onchain. Create and review transactions from our treasury, then execute with confidence.',
+      'Transform decisions into action. After a proposal passes, create and review transactions from our treasury, then execute them with confidence.',
     icon: ISPlay
   }
 ];
 </script>
 
 <template>
-  <div>
+  <div id="for-people" class="pt-8 border-b">
     <UiContainer class="!max-w-screen-lg">
-      <h1 class="font-display max-w-[680px] py-9 !text-[40px] sm:!text-[44px]">
-        Participate in global decision-making
-      </h1>
+      <div class="pb-6 max-w-[600px]">
+        <div class="eyebrow mb-3">For people</div>
+        <h1 class="mb-4 font-display !text-[38px] sm:!text-[44px]">
+          A democratic organization open to all
+        </h1>
+      </div>
     </UiContainer>
     <div class="border-y">
       <UiContainer class="!max-w-screen-lg !px-0">
@@ -50,7 +53,7 @@ const STEPS = [
                 <h2 class="mb-3 font-heading text-[22px] inline-block" v-text="step.title" />
               </div>
               <div class="mb-3 max-w-[457px]">
-                <div class="bg-contain flow w-full h-[260px]" :class="`step-${i + 1}`" />
+                <div class="bg-contain flow w-full max-h-[260px] h-[calc(50vw)]" :class="`step-${i + 1}`" />
               </div>
               <div v-text="step.about" />
             </div>

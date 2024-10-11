@@ -16,7 +16,7 @@ const FEATURES = [
   {
     title: 'Multiple voting systems',
     about:
-      'Support single choice, approval, basic, weighted, quadratic, and ranked choice voting. Select the most suitable method for each decision.',
+      'Support single choice, approval, basic, weighted, and ranked choice voting. Select the most suitable method for each decision.',
     icon: ISAdjustments
   },
   {
@@ -51,8 +51,8 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <div class="eyebrow mb-3">For orgs</div>
-        <h1 class="mb-4 font-display !text-[40px] sm:!text-[44px]">
-          Free and open-source platform of global democracy
+        <h1 class="mb-4 font-display !text-[38px] sm:!text-[44px]">
+          A free and open-source platform for global democracy
         </h1>
       </div>
     </UiContainer>
@@ -60,7 +60,7 @@ const FEATURES = [
       <UiContainer class="!max-w-screen-lg !px-0">
         <div class="grid grid-cols-1 lg:grid-cols-3">
           <div v-for="(feature, i) in FEATURES" :key="i"
-            class="px-4 py-5 lg:h-[260px] border-b last:border-b-0 border-r-0 lg:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-child(n+4)]:border-b-0">
+            class="px-4 py-5 border-b last:border-b-0 border-r-0 lg:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-child(n+4)]:border-b-0">
             <component :is="feature.icon" class="text-skin-link size-[22px] mb-4" />
             <h3 class="text-skin-link font-heading !text-[18px] mb-2" v-text="feature.title" />
             <div v-text="feature.about" />
