@@ -52,7 +52,7 @@ const FEATURES = [
       <div class="pb-6 max-w-[600px]">
         <div class="eyebrow mb-3">For orgs</div>
         <h1 class="mb-4 font-display !text-[40px] sm:!text-[44px]">
-          Providing a free and open-source platform for global democracy.
+          Free and open-source platform of global democracy
         </h1>
       </div>
     </UiContainer>

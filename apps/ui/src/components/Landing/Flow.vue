@@ -36,7 +36,7 @@ const STEPS = [
   <div>
     <UiContainer class="!max-w-screen-lg">
       <h1 class="font-display max-w-[680px] py-9 !text-[40px] sm:!text-[44px]">
-        Get a voice in global decisions
+        Participate in global decision-making
       </h1>
     </UiContainer>
     <div class="border-y">
