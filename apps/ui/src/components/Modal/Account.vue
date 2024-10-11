@@ -63,38 +63,41 @@ async function handleLogout() {
 }
 
 watch(open, () => (step.value = null));
+
+const showConnectors = ref(false);
+
+function handleLoginClick() {
+  showConnectors.value = true;
+}
 </script>
 
 <template>
   <UiModal :open="open" @close="$emit('close')">
     <template #header>
-      <h3 v-text="isLoggedOut ? 'Log in' : 'Account'" />
+      <h3 v-text="isLoggedOut ? 'Log in to the World Association' : 'Account'" />
     </template>
     <div class="m-4 flex flex-col gap-2">
       <template v-if="isLoggedOut">
-        <button
-          v-for="connector in availableConnectors"
-          :key="connector.id"
-          type="button"
-          @click="$emit('login', connector.id)"
-        >
-          <UiButton class="w-full flex justify-center items-center gap-2">
-            <img
-              :src="getConnectorIconUrl(connector.icon)"
-              height="28"
-              width="28"
-              :alt="connector.name"
-            />
-            {{ connector.name }}
+        <template v-if="!showConnectors">
+          <UiButton primary @click="handleLoginClick">
+            Log in
           </UiButton>
-        </button>
+          <UiButton @click="$emit('login', 'walletlink')">
+            Sign up
+          </UiButton>
+        </template>
+        <template v-else>
+          <button v-for="connector in availableConnectors" :key="connector.id" type="button"
+            @click="$emit('login', connector.id)">
+            <UiButton class="w-full flex justify-center items-center gap-2">
+              <img :src="getConnectorIconUrl(connector.icon)" height="28" width="28" :alt="connector.name" />
+              {{ connector.name }}
+            </UiButton>
+          </button>
+        </template>
       </template>
       <template v-else>
-        <UiButton
-          :to="{ name: 'user', params: { user: web3.account } }"
-          class="gap-2"
-          @click="emit('close')"
-        >
+        <UiButton :to="{ name: 'user', params: { user: web3.account } }" class="gap-2" @click="emit('close')">
           <UiStamp :id="user.id" :size="18" :cb="cb" />
           My profile
         </UiButton>
