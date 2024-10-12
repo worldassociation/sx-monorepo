@@ -19,7 +19,7 @@ const user = computed(() => {
 
 const tasks = computed(() => ({
   profile: !user.value?.created,
-  following: followedSpacesStore.followedSpacesIds.length < 3,
+  following: !followedSpacesStore.isFollowed('s:worldassociation.eth'),
   votes: !user.value?.votesCount
 }));
 
@@ -61,14 +61,8 @@ onMounted(async () => {
     <div v-if="tasks.following" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-1" /></div>
       <div class="grow">
-        Check the
-        <AppLink :to="{ name: 'my-explore' }"> explore </AppLink>
-        page and follow at least 3 spaces.
-        <div
-          class="inline-block bg-skin-border text-skin-link text-[13px] rounded-full px-1.5 ml-1"
-        >
-          {{ followedSpacesStore.followedSpacesIds.length }}/3
-        </div>
+        Follow the
+        <AppLink :to="'/s:worldassociation.eth'"> World Association </AppLink>
       </div>
     </div>
 
