@@ -4,7 +4,7 @@
     <UiContainer class="!max-w-screen-lg">
       <div class="text-center max-w-[600px] mx-auto">
         <div class="eyebrow mb-3">Join the World Association</div>
-        <h1 class="mb-4 font-display !text-[38px] sm:!text-[44px]">
+        <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
           Ready for global democracy?
         </h1>
         <UiButton :to="{ name: 'my-home' }" class="primary">

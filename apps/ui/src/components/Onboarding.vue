@@ -51,7 +51,7 @@ onMounted(async () => {
     <div v-if="tasks.profile" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <IS-flag class="text-skin-link mt-1 shrink-0" />
       <div class="grow">
-        Setup your
+        Set up your
         <AppLink :to="{ name: 'user', params: { user: user.id } }">
           profile
         </AppLink>

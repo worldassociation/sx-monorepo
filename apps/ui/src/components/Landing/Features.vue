@@ -10,7 +10,7 @@ const FEATURES = [
   {
     title: 'Costless polls and petitions',
     about:
-      'Eliminate hosting and authentication fees, break participation barriers and encourage broader community involvement in advocacy.',
+      'Create an unlimited number of free democratic polls and petitions, and encourage broader community involvement in advocacy.',
     icon: ISCursorClick
   },
   {
@@ -51,8 +51,8 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <div class="eyebrow mb-3">For orgs</div>
-        <h1 class="mb-4 font-display !text-[38px] sm:!text-[44px]">
-          A free and open-source platform for global democracy
+        <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
+          Free and open-source global democracy
         </h1>
       </div>
     </UiContainer>

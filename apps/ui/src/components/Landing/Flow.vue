@@ -8,7 +8,7 @@ const STEPS = [
   {
     title: 'Discuss',
     about:
-      "Stay up-to-date with conversations, participate in debates, and refine ideas on global issues directly within the World Association app.",
+      "Stay up-to-date with conversations on global issues, participate in debates, and refine ideas directly within the World Association app.",
     icon: ICAnnotation
   },
   {
@@ -20,24 +20,24 @@ const STEPS = [
   {
     title: 'Vote',
     about:
-      "Create proposals and cast votes through our intuitive interface. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.",
+      "Create proposals and cast votes anonymously. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.",
     icon: ISCheck
   },
   {
     title: 'Execute',
     about:
-      'Transform decisions into action. After a proposal passes, create and review transactions from our treasury, then execute them with confidence.',
+      'Turn decisions into action using our official currency, the world drachma. Once a proposal is approved, create transactions and execute them with confidence.',
     icon: ISPlay
   }
 ];
 </script>
 
 <template>
-  <div id="for-people" class="pt-8 border-b">
+  <div id="for-people" class="pt-8">
     <UiContainer class="!max-w-screen-lg">
-      <div class="pb-6 max-w-[600px]">
-        <div class="eyebrow mb-3">For people</div>
-        <h1 class="mb-4 font-display !text-[38px] sm:!text-[44px]">
+      <div class="pb-6 max-w-[600px] text-center mx-auto">
+        <div class="eyebrow mb-3">Uniting humanity</div>
+        <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
           A democratic organization open to all
         </h1>
       </div>

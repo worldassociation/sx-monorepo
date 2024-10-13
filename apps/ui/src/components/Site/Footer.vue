@@ -100,8 +100,7 @@ const SOCIALS = [
       </div>
       <div class="flex max-sm:flex-col max-sm:space-y-5">
         <div class="flex-grow flex items-center">
-          <div
-            class="box-border sm:mb-[3px] h-[30px] w-[30px] mr-3 inline-block rounded-full border-[5px] border-skin-primary">
+          <div class="box-border mb-[3px] size-[24px] mr-3 rounded-full border-[4px] border-skin-primary">
           </div>
           © {{ new Date().getFullYear() }} World Association
           <a :href="`https://github.com/${repository}${COMMIT_SHA && `/tree/${COMMIT_SHA}`}`" target="_blank"

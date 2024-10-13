@@ -72,7 +72,7 @@ export function useWeb3() {
     if (!connector) return;
 
     state.authLoading = true;
-    await auth.login(connector as string);
+    await auth.autoLogin(connector as string);
     await registerProvider();
     state.authLoading = false;
   }

@@ -4,7 +4,7 @@
     <UiContainer class="relative w-full !max-w-screen-lg flex items-center py-8">
       <div class="max-w-[560px]">
         <div class="eyebrow mb-3">World Association</div>
-        <h1 class="mb-5 font-display !text-[50px] sm:!text-[56px]">
+        <h1 class="mb-5 font-display !text-[48px] sm:!text-[56px]">
           The future of global governance
         </h1>
         <UiButton :to="{ name: 'my-home' }" class="primary">

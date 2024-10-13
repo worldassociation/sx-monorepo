@@ -13,9 +13,6 @@ const { toggleSkin, currentMode } = useUserSkin();
     </div>
     <ul class="hidden lg:flex text-md text-skin-link space-x-4 mr-6">
       <li>
-        <AppLink to="/#for-people">For people</AppLink>
-      </li>
-      <li>
         <AppLink to="/#for-orgs">For orgs</AppLink>
       </li>
     </ul>
