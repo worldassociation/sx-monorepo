@@ -63,6 +63,10 @@ const hasPlaceHolderSidebar = computed(
     !['space-editor', 'space-proposal'].includes(String(route.matched[1]?.name))
 );
 
+const hasTopNav = computed(() => {
+  return 'space-editor' !== String(route.matched[1]?.name);
+});
+
 const bottomPadding = computed(
   () => !['space-proposal-votes'].includes(String(route.name))
 );
@@ -158,28 +162,18 @@ router.afterEach(() => {
   <div ref="el" class="min-h-screen" :class="{ 'overflow-clip': scrollDisabled }">
     <UiLoading v-if="app.loading || !app.init" class="overlay big" />
     <div v-else :class="['flex min-h-screen', { 'pb-6': bottomPadding }]">
-      <AppBottomNav
-        v-if="web3.account && !isWhiteLabel"
-        :class="[
-          `fixed bottom-0 inset-x-0 hidden app-bottom-nav z-[100]`,
-          { 'app-bottom-nav-open': uiStore.sideMenuOpen }
-        ]"
-      />
-      <AppSidebar
-        v-if="hasSidebar"
-        :class="[
-          `hidden lg:flex app-sidebar fixed inset-y-0`,
-          { '!flex app-sidebar-open': uiStore.sideMenuOpen }
-        ]"
-      />
-      <AppTopnav :has-app-nav="hasAppNav">
+      <AppBottomNav v-if="web3.account && !isWhiteLabel" :class="[
+        `fixed bottom-0 inset-x-0 hidden app-bottom-nav z-[100]`,
+        { 'app-bottom-nav-open': uiStore.sideMenuOpen }
+      ]" />
+      <AppSidebar v-if="hasSidebar" :class="[
+        `hidden lg:flex app-sidebar fixed inset-y-0`,
+        { '!flex app-sidebar-open': uiStore.sideMenuOpen }
+      ]" />
+      <AppTopnav v-if="hasTopNav" :has-app-nav="hasAppNav">
         <template #toggle-sidebar-button>
-          <button
-            v-if="hasSwipeableContent"
-            type="button"
-            class="text-skin-link lg:hidden ml-4"
-            @click="uiStore.toggleSidebar"
-          >
+          <button v-if="hasSwipeableContent" type="button" class="text-skin-link lg:hidden ml-4"
+            @click="uiStore.toggleSidebar">
             <IH-menu-alt-2 />
           </button>
         </template>
@@ -224,10 +218,6 @@ $placeholderSidebarWidth: 240px;
         }
       }
 
-      &~ :deep(main) {
-        @apply z-[51];
-      }
-
       &:has(~ .app-nav)~.app-nav~ :deep(*) {
         @apply translate-x-[#{$sidebarWidth + $navWidth}];
       }
@@ -246,10 +236,6 @@ $placeholderSidebarWidth: 240px;
         .app-toolbar-bottom {
           @apply hidden;
         }
-      }
-
-      &~ :deep(main) {
-        @apply z-[51];
       }
     }
   }
