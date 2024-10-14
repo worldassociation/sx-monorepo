@@ -26,7 +26,7 @@ const STEPS = [
   {
     title: 'Execute',
     about:
-      'Turn decisions into action using our official currency, the world drachma. Once a proposal is approved, create transactions and execute them with confidence.',
+      'Watch decisions turn into action with the help of our treasury – powered by our official digital currency, the world drachma.',
     icon: ISPlay
   }
 ];
@@ -36,9 +36,8 @@ const STEPS = [
   <div id="for-people" class="pt-8">
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px] text-center mx-auto">
-        <div class="eyebrow mb-3">Uniting humanity</div>
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          A democratic organization open to all
+          Democratizing global governance
         </h1>
       </div>
     </UiContainer>
