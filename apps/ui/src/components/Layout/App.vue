@@ -163,7 +163,7 @@ router.afterEach(() => {
     <UiLoading v-if="app.loading || !app.init" class="overlay big" />
     <div v-else :class="['flex min-h-screen', { 'pb-6': bottomPadding }]">
       <AppBottomNav v-if="web3.account && !isWhiteLabel"
-        class="fixed bottom-0 inset-x-0 hidden app-bottom-nav z-[100] app-bottom-nav-open" />
+        class="fixed bottom-0 inset-x-0 hidden app-bottom-nav z-20 app-bottom-nav-open" />
       <AppSidebar v-if="hasSidebar" :class="[
         `hidden lg:flex app-sidebar fixed inset-y-0`,
         { '!flex app-sidebar-open': uiStore.sideMenuOpen }
@@ -184,7 +184,7 @@ router.afterEach(() => {
       ]" />
       <button v-if="uiStore.sideMenuOpen" type="button" class="backdrop" @click="uiStore.sideMenuOpen = false" />
       <main class="flex-auto w-full flex">
-        <div class="flex-auto w-0 mt-[72px]">
+        <div class="flex-auto w-0 mt-[72px] mb-[48px]">
           <router-view />
         </div>
         <div v-if="hasPlaceHolderSidebar" class="app-placeholder-sidebar hidden xl:block" />
