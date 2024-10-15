@@ -66,6 +66,26 @@ onMounted(async () => {
       </div>
     </div>
 
+    <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-1" /></div>
+      <div class="grow">
+        Create your
+        <a href="https://globalvoterid.org" target="_blank" class="text-skin-link">
+          Global Voter ID
+        </a>
+      </div>
+    </div>
+
+    <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-1" /></div>
+      <div class="grow">
+        Claim your
+        <a href="https://globalbasicincome.org" target="_blank" class="text-skin-link">
+          basic income
+        </a>
+      </div>
+    </div>
+
     <div v-if="tasks.votes" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-1" /></div>
       <div class="grow">Cast your first vote</div>
