@@ -3,20 +3,19 @@ import { repository, version } from '@/../package.json';
 import ICDiscord from '~icons/c/discord';
 import ICGithub from '~icons/c/github';
 import ICX from '~icons/c/x';
-
 const COMMIT_SHA = import.meta.env.VITE_COMMIT_SHA || '';
 
 const SOCIALS = [
   {
-    href: 'https://x.com/SnapshotLabs',
+    href: 'https://x.com/worldassociatio',
     icon: ICX
   },
   {
-    href: 'https://discord.snapshot.org',
+    href: 'https://discord.gg/J9A4g6axjR',
     icon: ICDiscord
   },
   {
-    href: 'https://github.com/snapshot-labs',
+    href: 'https://github.com/worldassociation',
     icon: ICGithub
   }
 ];
