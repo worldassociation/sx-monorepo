@@ -58,14 +58,6 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div v-if="tasks.following" class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <div><IS-flag class="text-skin-link mt-1" /></div>
-      <div class="grow">
-        Follow the
-        <AppLink :to="'/s:worldassociation.eth'"> World Association </AppLink>
-      </div>
-    </div>
-
     <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-1" /></div>
       <div class="grow">
@@ -86,9 +78,27 @@ onMounted(async () => {
       </div>
     </div>
 
+    <div v-if="tasks.following" class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-1" /></div>
+      <div class="grow">
+        Follow the
+        <AppLink :to="'/s:worldassociation.eth'"> World Association </AppLink>
+      </div>
+    </div>
+
     <div v-if="tasks.votes" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-1" /></div>
       <div class="grow">Cast your first vote</div>
+    </div>
+
+    <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-1" /></div>
+      <div class="grow">
+        Create a
+        <AppLink :to="'/s:polls.worldassociation.eth'"> poll </AppLink>
+        or start a
+        <AppLink :to="'/s:petitions.worldassociation.eth'"> petition </AppLink>
+      </div>
     </div>
   </div>
 </template>
