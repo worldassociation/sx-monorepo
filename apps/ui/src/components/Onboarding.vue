@@ -39,6 +39,7 @@ watch(() => web3.value.account, fetchVoterIdBalance, { immediate: true });
 
 const tasks = computed(() => ({
   voterId: !voterIdBalance.value || parseFloat(voterIdBalance.value) === 0,
+  basicIncome: true,
   following: !followedSpacesStore.isFollowed('s:worldassociation.eth'),
   votes: !user.value?.votesCount
 }));
@@ -76,7 +77,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
+    <div v-if="tasks.basicIncome" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         Claim your

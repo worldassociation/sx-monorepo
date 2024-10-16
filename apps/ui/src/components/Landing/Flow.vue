@@ -26,7 +26,7 @@ const STEPS = [
   {
     title: 'Execute',
     about:
-      'Turn decisions into action. After a proposal passes, create transactions from our treasury – using our official currency, the world drachma.',
+      'Turn decisions into action. After a proposal passes, create transactions from our treasury using our official currency, the world drachma.',
     icon: ISPlay
   }
 ];
