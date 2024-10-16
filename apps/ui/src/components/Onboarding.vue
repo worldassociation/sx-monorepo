@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { lsGet, lsSet } from '@/helpers/utils';
+import { ref, computed, watch } from 'vue';
+import { ethers } from 'ethers';
+import { GLOBAL_VOTER_ID_ZKME_ADDRESS } from '../helpers/constants';
 
 const usersStore = useUsersStore();
 const { web3 } = useWeb3();
@@ -17,8 +20,25 @@ const user = computed(() => {
   }
 });
 
+const voterIdBalance = ref<string | null>(null);
+
+async function fetchVoterIdBalance() {
+  if (!web3.value.account) return;
+
+  const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
+  const abi = [
+    "function balanceOf(address owner) view returns (uint256)"
+  ];
+  const contract = new ethers.Contract(GLOBAL_VOTER_ID_ZKME_ADDRESS, abi, provider);
+
+  const balance = await contract.balanceOf(web3.value.account);
+  voterIdBalance.value = ethers.utils.formatUnits(balance, 18);
+}
+
+watch(() => web3.value.account, fetchVoterIdBalance, { immediate: true });
+
 const tasks = computed(() => ({
-  profile: !user.value?.created,
+  voterId: !voterIdBalance.value || parseFloat(voterIdBalance.value) === 0,
   following: !followedSpacesStore.isFollowed('s:worldassociation.eth'),
   votes: !user.value?.votesCount
 }));
@@ -48,28 +68,16 @@ onMounted(async () => {
 <template>
   <div v-if="user && hasPendingTasks">
     <UiLabel label="onboarding" sticky />
-    <div v-if="tasks.profile" class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <IS-flag class="text-skin-link mt-1 shrink-0" />
-      <div class="grow">
-        Set up your
-        <AppLink :to="{ name: 'user', params: { user: user.id } }">
-          profile
-        </AppLink>
-      </div>
-    </div>
-
-    <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <div><IS-flag class="text-skin-link mt-1" /></div>
+    <div v-if="tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         Create your
-        <a href="https://globalvoterid.org" target="_blank" class="text-skin-link">
-          Global Voter ID
-        </a>
+        <ButtonClaim />
       </div>
     </div>
 
     <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <div><IS-flag class="text-skin-link mt-1" /></div>
+      <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         Claim your
         <a href="https://globalbasicincome.org" target="_blank" class="text-skin-link">
@@ -79,20 +87,20 @@ onMounted(async () => {
     </div>
 
     <div v-if="tasks.following" class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <div><IS-flag class="text-skin-link mt-1" /></div>
+      <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         Follow the
         <AppLink :to="'/s:worldassociation.eth'"> World Association </AppLink>
       </div>
     </div>
 
-    <div v-if="tasks.votes" class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <div><IS-flag class="text-skin-link mt-1" /></div>
+    <div v-if="tasks.votes && !tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">Cast your first vote</div>
     </div>
 
-    <div class="border-b mx-4 py-[14px] flex gap-x-2.5">
-      <div><IS-flag class="text-skin-link mt-1" /></div>
+    <div v-if="!tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         Create a
         <AppLink :to="'/s:polls.worldassociation.eth'"> poll </AppLink>
