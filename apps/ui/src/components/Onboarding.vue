@@ -3,6 +3,7 @@ import { lsGet, lsSet } from '@/helpers/utils';
 import { ref, computed, watch } from 'vue';
 import { ethers } from 'ethers';
 import { GLOBAL_VOTER_ID_ZKME_ADDRESS } from '../helpers/constants';
+import ButtonClaimID from './ButtonClaimID.vue';
 
 const usersStore = useUsersStore();
 const { web3 } = useWeb3();
@@ -73,17 +74,14 @@ onMounted(async () => {
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         Create your
-        <ButtonClaim />
+        <ButtonClaimID />
       </div>
     </div>
 
     <div v-if="tasks.basicIncome" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
-        Claim your
-        <a href="https://globalbasicincome.org" target="_blank" class="text-skin-link">
-          basic income
-        </a>
+        <ButtonClaimBasicIncome />
       </div>
     </div>
 
