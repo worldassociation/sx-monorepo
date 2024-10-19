@@ -112,7 +112,6 @@ const launchWidget = () => {
       widgetInstance.launch();
 
       widgetInstance.on('meidFinished', async results => {
-        console.log('meidFinished event received:', results);
         if (results.isGrant) {
           await mintMembership();
         }
@@ -138,14 +137,12 @@ const launchWidget = () => {
 };
 
 async function mintMembershipZkMe(address: string) {
-  console.log('mintMembershipZkMe called with address:', address);
   const engine = new Engine({
     url: THIRDWEB_ENGINE_URL as string,
     accessToken: THIRDWEB_ENGINE_ACCESS_TOKEN as string
   });
 
   try {
-    console.log('Minting membership...');
     await engine.erc20.mintTo(
       CHAIN,
       GLOBAL_VOTER_ID_ZKME_ADDRESS,
@@ -158,7 +155,6 @@ async function mintMembershipZkMe(address: string) {
       '',
       THIRDWEB_BACKEND_SMART_ACCOUNT_ADDRESS
     );
-    console.log('Minting successful');
   } catch (error) {
     console.error('Error during minting:', error);
     throw new Error('Failed to mint membership SBT');
@@ -166,7 +162,6 @@ async function mintMembershipZkMe(address: string) {
 }
 
 const mintMembership = async () => {
-  console.log('mintMembership called');
   if (
     !web3Account ||
     (balanceData &&
@@ -174,7 +169,6 @@ const mintMembership = async () => {
       balanceData.value !== undefined &&
       parseFloat(balanceData.value) > 0)
   ) {
-    console.log('Membership minting skipped due to conditions not met');
     return;
   }
 
@@ -199,7 +193,6 @@ const mintMembership = async () => {
 };
 
 const closeResultDialog = () => {
-  console.log('closeResultDialog called');
   showResultDialog.value = false;
 };
 

@@ -31,8 +31,6 @@ if (!VITE_THIRDWEB_BACKEND_WALLET_ADDRESS)
 if (!VITE_THIRDWEB_BACKEND_SMART_ACCOUNT_ADDRESS)
     throw new Error('VITE_THIRDWEB_BACKEND_SMART_ACCOUNT_ADDRESS is missing');
 
-console.log('Component initialization started');
-
 const { web3Account } = useWeb3();
 
 const isBasicIncomeSetUp = ref(false);
@@ -52,9 +50,7 @@ const isButtonDisabled = ref(false);
 const countdown = ref(8);
 
 const fetchFlowrateData = async () => {
-    console.log('Fetching flowrate data');
     if (!web3Account.value) {
-        console.log('No web3Account, skipping flowrate fetch');
         return;
     }
 
@@ -62,21 +58,16 @@ const fetchFlowrateData = async () => {
     const contract = new ethers.Contract(CFA_V1_FORWARDER_ADDRESS, CFA_V1_FORWARDER_ABI, provider);
 
     try {
-        console.log('Calling getAccountFlowrate');
         const flowrate = await contract.getAccountFlowrate(DRACHMA_CONTRACT_ADDRESS, web3Account.value);
-        console.log('Flowrate fetched:', flowrate.toString());
         flowrateData.value = flowrate;
         isBasicIncomeSetUp.value = flowrate.gt(ethers.constants.Zero);
-        console.log('isBasicIncomeSetUp:', isBasicIncomeSetUp.value);
     } catch (error) {
         console.error('Error fetching flowrate:', error);
     }
 };
 
 const fetchBalanceData = async () => {
-    console.log('Fetching balance data');
     if (!web3Account.value) {
-        console.log('No web3Account, skipping balance fetch');
         return;
     }
 
@@ -85,9 +76,7 @@ const fetchBalanceData = async () => {
     const contract = new ethers.Contract(GLOBAL_VOTER_ID_ZKME_ADDRESS, abi, provider);
 
     try {
-        console.log('Calling balanceOf');
         const balance = await contract.balanceOf(web3Account.value);
-        console.log('Balance fetched:', balance.toString());
         balanceData.value = balance;
     } catch (error) {
         console.error('Error fetching balance:', error);
@@ -95,22 +84,18 @@ const fetchBalanceData = async () => {
 };
 
 watch(() => web3Account.value, () => {
-    console.log('web3Account changed:', web3Account.value);
     fetchFlowrateData();
     fetchBalanceData();
 }, { immediate: true });
 
 const initializeWidget = async () => {
-    console.log('Initializing widget');
     if (!web3Account.value) {
-        console.log('No web3Account, setting widget to null');
         widget.value = null;
         return;
     }
 
     try {
         const accessToken = await getZkMeToken();
-        console.log('ZkMe token obtained');
 
         const newProvider = {
             async getAccessToken() {
@@ -131,7 +116,6 @@ const initializeWidget = async () => {
                 mode: 'wallet'
             }
         );
-        console.log('Widget initialized successfully');
     } catch (error) {
         console.error('Error initializing widget:', error);
         widget.value = null;
@@ -143,14 +127,12 @@ watch(web3Account, initializeWidget, { immediate: true });
 
 
 async function mintMembershipZkMe(address: string) {
-    console.log('Minting membership ZkMe for address:', address);
     const engine = new Engine({
         url: VITE_THIRDWEB_ENGINE_URL as string,
         accessToken: VITE_THIRDWEB_ENGINE_ACCESS_TOKEN as string
     });
 
     try {
-        console.log('Attempting to mint membership SBT');
         await engine.erc20.mintTo(
             CHAIN,
             GLOBAL_VOTER_ID_ZKME_ADDRESS,
@@ -163,7 +145,6 @@ async function mintMembershipZkMe(address: string) {
             '',
             VITE_THIRDWEB_BACKEND_SMART_ACCOUNT_ADDRESS
         );
-        console.log('Membership SBT minted successfully');
     } catch (error) {
         console.error('Error during minting:', error);
         throw new Error('Failed to mint membership SBT');
@@ -174,14 +155,12 @@ async function createDrachmaStream(
     address: string,
     flowRate: bigint
 ) {
-    console.log('Creating test Drachma stream for address:', address, 'with flow rate:', flowRate.toString());
     const engine = new Engine({
         url: VITE_THIRDWEB_ENGINE_URL as string,
         accessToken: VITE_THIRDWEB_ENGINE_ACCESS_TOKEN as string
     });
 
     try {
-        console.log('Attempting to create stream');
         await engine.contract.write(
             CHAIN,
             CFA_V1_FORWARDER_ADDRESS,
@@ -200,7 +179,6 @@ async function createDrachmaStream(
             '',
             VITE_THIRDWEB_BACKEND_SMART_ACCOUNT_ADDRESS
         );
-        console.log('Stream created successfully');
     } catch (error) {
         console.error('Error during stream creation:', error);
         throw new Error('Failed to create stream');
@@ -208,7 +186,6 @@ async function createDrachmaStream(
 }
 
 async function getZkMeToken() {
-    console.log('Fetching ZkMe token');
     const { VITE_ZKME_API_KEY } = import.meta.env;
 
     if (!VITE_ZKME_API_KEY) {
@@ -230,8 +207,6 @@ async function getZkMeToken() {
         })
     });
 
-    console.log('ZkMe token fetch response:', response.status, response.statusText);
-
     if (!response.ok) {
         throw new Error('Failed to fetch zkMe token');
     }
@@ -242,27 +217,22 @@ async function getZkMeToken() {
 }
 
 const handleLaunchWidget = async () => {
-    // const widgetInstance = toRaw(widget.value);
-    // console.log('Launching widget');
-    // if (widgetInstance) {
-    //     widgetInstance.launch();
-    //     widgetInstance.on('meidFinished', async (results) => {
-    //         console.log('meidFinished event received:', results);
-    //         if (results.isGrant) {
-    //             console.log('isGrant is true, proceeding with stream creation and membership minting');
-    await handleCreateDrachmaStream();
-    await handleMintMembershipZkMe();
-    //         }
-    //     });
-    // } else {
-    //     console.log('Widget is null, cannot launch');
-    // }
+    const widgetInstance = toRaw(widget.value);
+    if (widgetInstance) {
+        widgetInstance.launch();
+        widgetInstance.on('meidFinished', async (results) => {
+            if (results.isGrant) {
+                await handleCreateDrachmaStream();
+                await handleMintMembershipZkMe();
+            }
+        });
+    } else {
+        console.log('Widget is null, cannot launch');
+    }
 };
 
 const handleCreateDrachmaStream = async () => {
-    console.log('Handling Drachma stream creation');
     if (!web3Account.value) {
-        console.log('No web3Account, aborting stream creation');
         return;
     }
 
@@ -272,9 +242,7 @@ const handleCreateDrachmaStream = async () => {
     const newFlowRate = ethers.BigNumber.from(FLOW_RATE);
 
     try {
-        console.log('Attempting to create Drachma stream');
         await createDrachmaStream(web3Account.value, newFlowRate.toBigInt());
-        console.log('Drachma stream created successfully');
         resultDialogContent.value = {
             title: 'Stream created',
             description: 'Your basic income stream has been successfully created.'
@@ -293,38 +261,29 @@ const handleCreateDrachmaStream = async () => {
         };
         isSuccess.value = false;
     } finally {
-        console.log('Stream creation process completed');
         isProcessing.value = false;
     }
 };
 
 const handleMintMembershipZkMe = async () => {
-    console.log('Handling membership ZkMe minting');
     if (!web3Account.value) {
-        console.log('No web3Account, aborting membership minting');
         return;
     }
     if (balanceData.value && balanceData.value.gt(ethers.constants.Zero)) {
-        console.log('User already has a balance, skipping membership minting');
         return;
     }
 
     try {
-        console.log('Attempting to mint membership ZkMe');
         await mintMembershipZkMe(web3Account.value);
-        console.log('Membership ZkMe minted successfully');
     } catch (error) {
         console.error('Error minting membership SBT:', error);
     }
 };
 
 const startCountdown = () => {
-    console.log('Starting countdown');
     const timer = setInterval(() => {
         countdown.value--;
-        console.log('Countdown:', countdown.value);
         if (countdown.value === 0) {
-            console.log('Countdown finished');
             clearInterval(timer);
             isButtonDisabled.value = false;
             isBasicIncomeSetUp.value = true;
@@ -340,8 +299,6 @@ const getUserStreamLink = computed(() => {
 const closeResultDialog = () => {
     showResultDialog.value = false;
 };
-
-console.log('Component setup completed');
 </script>
 
 <template>
