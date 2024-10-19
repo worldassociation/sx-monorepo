@@ -124,33 +124,6 @@ const initializeWidget = async () => {
 
 watch(web3Account, initializeWidget, { immediate: true });
 
-
-
-async function mintMembershipZkMe(address: string) {
-    const engine = new Engine({
-        url: VITE_THIRDWEB_ENGINE_URL as string,
-        accessToken: VITE_THIRDWEB_ENGINE_ACCESS_TOKEN as string
-    });
-
-    try {
-        await engine.erc20.mintTo(
-            CHAIN,
-            GLOBAL_VOTER_ID_ZKME_ADDRESS,
-            VITE_THIRDWEB_BACKEND_WALLET_ADDRESS as string,
-            {
-                toAddress: address,
-                amount: '1.0'
-            },
-            false,
-            '',
-            VITE_THIRDWEB_BACKEND_SMART_ACCOUNT_ADDRESS
-        );
-    } catch (error) {
-        console.error('Error during minting:', error);
-        throw new Error('Failed to mint membership SBT');
-    }
-}
-
 async function createDrachmaStream(
     address: string,
     flowRate: bigint
@@ -223,7 +196,6 @@ const handleLaunchWidget = async () => {
         widgetInstance.on('meidFinished', async (results) => {
             if (results.isGrant) {
                 await handleCreateDrachmaStream();
-                await handleMintMembershipZkMe();
             }
         });
     } else {
@@ -238,6 +210,10 @@ const handleCreateDrachmaStream = async () => {
 
     isProcessing.value = true;
     showResultDialog.value = true;
+    resultDialogContent.value = {
+        title: 'Processing',
+        description: 'Creating your basic income stream...'
+    };
 
     const newFlowRate = ethers.BigNumber.from(FLOW_RATE);
 
@@ -262,21 +238,6 @@ const handleCreateDrachmaStream = async () => {
         isSuccess.value = false;
     } finally {
         isProcessing.value = false;
-    }
-};
-
-const handleMintMembershipZkMe = async () => {
-    if (!web3Account.value) {
-        return;
-    }
-    if (balanceData.value && balanceData.value.gt(ethers.constants.Zero)) {
-        return;
-    }
-
-    try {
-        await mintMembershipZkMe(web3Account.value);
-    } catch (error) {
-        console.error('Error minting membership SBT:', error);
     }
 };
 
@@ -315,24 +276,15 @@ const closeResultDialog = () => {
         </span>
     </template>
 
-
     <Teleport to="body">
         <UiModal :open="showResultDialog" @close="closeResultDialog">
             <template #header>
                 <h3>{{ resultDialogContent.title }}</h3>
             </template>
             <div class="p-4 flex flex-col space-y-2 text-center">
-                <template v-if="isProcessing">
-                    <UiLoading />
-                    <p class="text-muted-foreground text-sm">
-                        Creating your basic income stream...
-                    </p>
-                </template>
-                <template v-else>
-                    <p class="text-muted-foreground text-sm">
-                        {{ resultDialogContent.description }}
-                    </p>
-                </template>
+                <p class="text-muted-foreground text-sm p-0">
+                    {{ resultDialogContent.description }}
+                </p>
             </div>
             <template #footer>
                 <div class="flex flex-row items-center justify-center gap-2">

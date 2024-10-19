@@ -172,6 +172,11 @@ const mintMembership = async () => {
     return;
   }
 
+  resultDialogContent.value = {
+    title: 'Processing',
+    description: 'Creating your Global Voter ID...'
+  };
+
   isProcessing.value = true;
   showResultDialog.value = true;
 
@@ -210,7 +215,7 @@ watch(() => web3Account, initializeWidget, { immediate: true });
         <h3>{{ resultDialogContent.title }}</h3>
       </template>
       <div class="p-4 flex flex-col space-y-2 text-center">
-        <p class="text-muted-foreground">
+        <p class="text-muted-foreground text-sm p-0">
           {{ resultDialogContent.description }}
         </p>
       </div>
