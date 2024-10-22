@@ -73,7 +73,7 @@ const FEATURES = [
       <div class="pb-6 max-w-[600px]">
         <div class="eyebrow mb-3">Features</div>
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Everything you need to have a global impact
+          Everything you need to shape the future of humanity
         </h1>
       </div>
     </UiContainer>
