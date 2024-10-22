@@ -11,7 +11,6 @@ useTitle(APP_NAME);
     <LandingCounter />
     <LandingUsers />
     <LandingFeatures />
-    <LandingEcosystem />
     <LandingStart />
   </div>
 </template>
