@@ -19,19 +19,19 @@ const FEATURES = [
   {
     title: 'Costless polls and petitions',
     about:
-      'Create an unlimited number of free polls and petitions to encourage broader community involvement in advocacy.',
+      'Create an unlimited number of free polls and petitions, and encourage broader community involvement in advocacy.',
     icon: ISCursorClick
   },
   {
     title: 'Democratic legitimacy',
     about:
-      'Utilize our Global Voter ID system and guarantee that only real and unique humans participate in your projects.',
+      'Utilize our Global Voter ID system to ensure that only real and unique people participate in your projects.',
     icon: ISUserGroup
   },
   {
     title: 'A source of funding',
     about:
-      'Receive grants in our official currency to create positive change and tackle humanity\'s most pressing challenges.',
+      'Receive grants in our official currency, create positive change, and tackle humanity\'s most pressing challenges.',
     icon: ISBanknotes
   },
   {
@@ -49,13 +49,13 @@ const FEATURES = [
   {
     title: 'Multiple voting systems',
     about:
-      'Select the most suitable voting method for each decision or be creative and develop your own.',
+      'Choose the most appropriate voting method for each decision or create a new one tailored to your needs.',
     icon: ISAdjustments
   },
   {
     title: 'AI proposal summary',
     about:
-      'Concise overviews of proposals to help voters quickly understand key points for informed decision-making.',
+      'Help voters quickly understand key points for informed decision-making with concise overviews of proposals.',
     icon: ISSparkles
   },
   {
