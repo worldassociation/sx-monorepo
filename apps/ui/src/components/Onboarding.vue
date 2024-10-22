@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { lsGet, lsSet } from '@/helpers/utils';
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { ethers } from 'ethers';
 import { GLOBAL_VOTER_ID_ZKME_ADDRESS } from '../helpers/constants';
 import ButtonClaimID from './ButtonClaimID.vue';
@@ -22,6 +22,7 @@ const user = computed(() => {
 });
 
 const voterIdBalance = ref<string | null>(null);
+const loading = ref(true);
 
 async function fetchVoterIdBalance() {
   if (!web3.value.account) return;
@@ -34,6 +35,7 @@ async function fetchVoterIdBalance() {
 
   const balance = await contract.balanceOf(web3.value.account);
   voterIdBalance.value = ethers.utils.formatUnits(balance, 18);
+  loading.value = false;
 }
 
 watch(() => web3.value.account, fetchVoterIdBalance, { immediate: true });
@@ -65,10 +67,16 @@ onMounted(async () => {
   if (pending && web3.value.account)
     await usersStore.fetchUser(web3.value.account, true);
 });
+
+const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
 </script>
 
 <template>
-  <div v-if="user && hasPendingTasks">
+  <div v-if="loading">
+    <UiLabel label="onboarding" sticky class="mb-4" />
+    <UiLoading class="p-4" />
+  </div>
+  <div v-else-if="user && hasPendingTasks && isVoterIdBalanceLoaded">
     <UiLabel label="onboarding" sticky />
     <div v-if="tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
