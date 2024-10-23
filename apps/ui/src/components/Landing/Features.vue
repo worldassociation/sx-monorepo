@@ -13,7 +13,7 @@ const FEATURES = [
   {
     title: 'An open platform',
     about:
-      'Launch your initiatives on a free, open-source platform, ensuring transparency and integrity at every step.',
+      'Launch your campaigns on an open-source, democratically run platform that promotes transparency at every step.',
     icon: ICGitHub
   },
   {
@@ -25,7 +25,7 @@ const FEATURES = [
   {
     title: 'Democratic legitimacy',
     about:
-      'Utilize our Global Voter ID system to ensure that only real and unique people participate in your projects.',
+      'Use our permissionless Global Voter ID system to ensure that only real people participate in your initiatives.',
     icon: ISUserGroup
   },
   {
