@@ -13,49 +13,49 @@ const FEATURES = [
   {
     title: 'An open platform',
     about:
-      'Launch your campaigns on an open-source, democratically run platform that promotes transparency at every step.',
+      'Launch your campaigns on an open-source platform that promotes transparency at every step.',
     icon: ICGitHub
   },
   {
     title: 'Costless polls and petitions',
     about:
-      'Create an unlimited number of free polls and petitions, and encourage broader community involvement in advocacy.',
+      'Amplify your advocacy with unlimited free polls and petitions, engaging your community like never before.',
     icon: ISCursorClick
   },
   {
     title: 'Democratic legitimacy',
     about:
-      'Use our permissionless Global Voter ID system to ensure that only real people participate in your initiatives.',
+      'Use our permissionless Global Voter ID to ensure that only real people participate in your initiatives.',
     icon: ISUserGroup
   },
   {
     title: 'A source of funding',
     about:
-      'Receive grants in our official currency, create positive change, and tackle humanity\'s most pressing challenges.',
+      'Secure grants to drive positive change and address humanity\'s most pressing challenges.',
     icon: ISBanknotes
   },
   {
     title: 'Shielded voting',
     about:
-      'Keep voter choices confidential until voting ends, preventing manipulation and promoting fair, unbiased outcomes.',
+      'Keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
     icon: ISShieldCheck
   },
   {
     title: 'Discourse integration',
     about:
-      'View discussions and comments directly within the app, enhancing context and facilitating informed decision-making.',
+      'View discussions directly within the app, enhancing context and facilitating informed decision-making.',
     icon: ICDiscourse
   },
   {
     title: 'Multiple voting systems',
     about:
-      'Choose the most appropriate voting method for each decision or create a new one tailored to your needs.',
+      'Choose the appropriate voting method for each decision or create a new one tailored to your needs.',
     icon: ISAdjustments
   },
   {
     title: 'AI proposal summary',
     about:
-      'Help voters quickly understand key points for informed decision-making with concise overviews of proposals.',
+      'Help voters understand key points for informed decision-making with concise overviews of proposals.',
     icon: ISSparkles
   },
   {

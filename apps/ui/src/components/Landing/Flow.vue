@@ -37,7 +37,7 @@ const STEPS = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px] text-center mx-auto">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Free and open-source platform for global democracy
+          A free and open-source platform for global democracy
         </h1>
       </div>
     </UiContainer>

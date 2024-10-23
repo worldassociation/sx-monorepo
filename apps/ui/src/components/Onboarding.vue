@@ -27,15 +27,21 @@ const loading = ref(true);
 async function fetchVoterIdBalance() {
   if (!web3.value.account) return;
 
-  const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
-  const abi = [
-    "function balanceOf(address owner) view returns (uint256)"
-  ];
-  const contract = new ethers.Contract(GLOBAL_VOTER_ID_ZKME_ADDRESS, abi, provider);
+  try {
+    const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
+    const abi = [
+      "function balanceOf(address owner) view returns (uint256)"
+    ];
+    const contract = new ethers.Contract(GLOBAL_VOTER_ID_ZKME_ADDRESS, abi, provider);
 
-  const balance = await contract.balanceOf(web3.value.account);
-  voterIdBalance.value = ethers.utils.formatUnits(balance, 18);
-  loading.value = false;
+    const balance = await contract.balanceOf(web3.value.account);
+    voterIdBalance.value = ethers.utils.formatUnits(balance, 18);
+  } catch (error) {
+    console.error('Error fetching voter ID balance:', error);
+    voterIdBalance.value = '0';
+  } finally {
+    loading.value = false;
+  }
 }
 
 watch(() => web3.value.account, fetchVoterIdBalance, { immediate: true });
