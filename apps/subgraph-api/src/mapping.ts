@@ -66,7 +66,6 @@ CHAIN_IDS.set('sepolia', 11155111)
 CHAIN_IDS.set('optimism', 10)
 CHAIN_IDS.set('matic', 137)
 CHAIN_IDS.set('arbitrum-one', 42161)
-CHAIN_IDS.set('linea-testnet', 59140)
 
 export function handleProxyDeployed(event: ProxyDeployed): void {
   let network = dataSource.network()
@@ -228,6 +227,7 @@ export function handleProposalCreated(event: ProposalCreated): void {
   proposal.strategies_indicies = proposal.strategies_indices
   proposal.strategies = space.strategies
   proposal.strategies_params = space.strategies_params
+  proposal.type = 'basic'
   proposal.scores_1 = BigDecimal.fromString('0')
   proposal.scores_2 = BigDecimal.fromString('0')
   proposal.scores_3 = BigDecimal.fromString('0')
