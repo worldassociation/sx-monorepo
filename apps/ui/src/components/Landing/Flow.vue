@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import ICAnnotation from '~icons/heroicons-solid/annotation';
 import ISCheck from '~icons/heroicons-solid/check';
 import ISLightningBolt from '~icons/heroicons-solid/lightning-bolt';
 import ISPlay from '~icons/heroicons-solid/play';
+import ISUserPlus from '~icons/heroicons-solid/user-plus';
 
 const STEPS = [
   {
-    title: 'Discuss',
+    title: 'Join',
     about:
-      "Stay up-to-date with conversations on global issues, participate in debates, and refine ideas directly within the World Association app.",
-    icon: ICAnnotation
+      'Join the community, set up your basic income, and stay up-to-date with conversations on global issues directly within the World Association app.',
+    icon: ISUserPlus
   },
   {
     title: 'Delegate',
@@ -20,7 +20,7 @@ const STEPS = [
   {
     title: 'Vote',
     about:
-      "Create proposals and cast votes anonymously. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.",
+      'Create proposals and cast votes anonymously. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.',
     icon: ISCheck
   },
   {
@@ -37,7 +37,7 @@ const STEPS = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px] text-center mx-auto">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          A free and open-source platform for global democracy
+          A democratic community open to everyone
         </h1>
       </div>
     </UiContainer>

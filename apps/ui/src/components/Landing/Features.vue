@@ -2,37 +2,37 @@
 import ICDiscourse from '~icons/c/discourse';
 import ICGitHub from '~icons/c/github';
 import ISAdjustments from '~icons/heroicons-solid/adjustments';
+import ISBanknotes from '~icons/heroicons-solid/banknotes';
 import ISColorSwatch from '~icons/heroicons-solid/color-swatch';
 import ISCursorClick from '~icons/heroicons-solid/cursor-click';
 import ISShieldCheck from '~icons/heroicons-solid/shield-check';
 import ISSparkles from '~icons/heroicons-solid/sparkles';
-import ISBanknotes from '~icons/heroicons-solid/banknotes';
 import ISUserGroup from '~icons/heroicons-solid/user-group';
 
 const FEATURES = [
   {
-    title: 'An open platform',
-    about:
-      'Launch your campaigns on an open-source platform that promotes transparency at every step.',
-    icon: ICGitHub
-  },
-  {
     title: 'Costless polls and petitions',
     about:
-      'Amplify your advocacy with unlimited free polls and petitions, engaging your community like never before.',
+      'Amplify your advocacy with unlimited polls and petitions, engaging your community like never before.',
     icon: ISCursorClick
   },
   {
     title: 'Democratic legitimacy',
     about:
-      'Use our permissionless Global Voter ID to ensure that only real people participate in your initiatives.',
+      'Use our Global Voter ID system to ensure that only real and unique people participate in your initiatives.',
     icon: ISUserGroup
   },
   {
     title: 'A source of funding',
     about:
-      'Secure grants to drive positive change and address humanity\'s most pressing challenges.',
+      "Secure grants to drive positive change and address humanity's most pressing challenges.",
     icon: ISBanknotes
+  },
+  {
+    title: 'An open application',
+    about:
+      'Launch your campaigns on an open-source platform that is free to use and free to improve.',
+    icon: ICGitHub
   },
   {
     title: 'Shielded voting',
@@ -71,9 +71,8 @@ const FEATURES = [
   <div id="features" class="pt-8 border-b">
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
-        <div class="eyebrow mb-3">Features</div>
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Everything you need to shape the future of humanity
+          A free and open-source platform for global democracy
         </h1>
       </div>
     </UiContainer>
