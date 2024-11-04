@@ -8,7 +8,7 @@ const STEPS = [
   {
     title: 'Join',
     about:
-      'Join the community, set up your basic income, and stay up-to-date with conversations on global issues directly within the World Association app.',
+      'Claim your Global Voter ID, set up your basic income, and join conversations on global issues while remaining completely anonymous by default.',
     icon: ISUserPlus
   },
   {
