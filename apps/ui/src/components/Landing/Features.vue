@@ -11,6 +11,12 @@ import ISUserGroup from '~icons/heroicons-solid/user-group';
 
 const FEATURES = [
   {
+    title: 'Open-source software',
+    about:
+      'Launch your campaigns on a transparent application that is free to use and free to improve.',
+    icon: ICGitHub
+  },
+  {
     title: 'Costless polls and petitions',
     about:
       'Amplify your advocacy with unlimited polls and petitions, engaging your community like never before.',
@@ -23,22 +29,16 @@ const FEATURES = [
     icon: ISUserGroup
   },
   {
-    title: 'A source of funding',
+    title: 'Community grants',
     about:
-      "Secure grants to drive positive change and address humanity's most pressing challenges.",
+      "Receive funding to drive positive change and address humanity's most pressing global challenges.",
     icon: ISBanknotes
   },
   {
-    title: 'An open application',
+    title: 'Multiple voting systems',
     about:
-      'Launch your campaigns on an open-source platform that is free to use and free to improve.',
-    icon: ICGitHub
-  },
-  {
-    title: 'Shielded voting',
-    about:
-      'Keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
-    icon: ISShieldCheck
+      'Choose the appropriate voting method for each decision or create a new one tailored to your needs.',
+    icon: ISAdjustments
   },
   {
     title: 'Discourse integration',
@@ -47,10 +47,10 @@ const FEATURES = [
     icon: ICDiscourse
   },
   {
-    title: 'Multiple voting systems',
+    title: 'Shielded voting',
     about:
-      'Choose the appropriate voting method for each decision or create a new one tailored to your needs.',
-    icon: ISAdjustments
+      'Keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
+    icon: ISShieldCheck
   },
   {
     title: 'AI proposal summary',
@@ -72,7 +72,7 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          A free and open-source platform for global democracy
+          An open platform for global democracy
         </h1>
       </div>
     </UiContainer>

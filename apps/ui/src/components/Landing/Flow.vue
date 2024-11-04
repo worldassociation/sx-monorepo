@@ -33,7 +33,7 @@ const STEPS = [
 </script>
 
 <template>
-  <div id="for-people" class="pt-8">
+  <div id="community" class="pt-8">
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px] text-center mx-auto">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
