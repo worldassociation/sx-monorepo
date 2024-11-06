@@ -182,6 +182,7 @@ function formatSpace(
     github: space.metadata.github,
     twitter: space.metadata.twitter,
     discord: space.metadata.discord,
+    terms: '',
     voting_power_symbol: space.metadata.voting_power_symbol,
     voting_types: constants.EDITOR_VOTING_TYPES,
     treasuries: space.metadata.treasuries.map(treasury => {
@@ -199,17 +200,28 @@ function formatSpace(
       return { id, name, description, color };
     }),
     delegations: space.metadata.delegations.map(delegation => {
-      const { name, api_type, api_url, contract } = JSON.parse(delegation);
+      const { name, api_type, api_url, contract, chain_id } =
+        JSON.parse(delegation);
 
-      const [network, address] = contract.split(':');
+      if (contract.includes(':')) {
+        // NOTE: Legacy format
+        const [network, address] = contract.split(':');
+
+        return {
+          name: name,
+          apiType: api_type,
+          apiUrl: api_url,
+          contractAddress: address === 'null' ? null : address,
+          chainId: CHAIN_IDS[network]
+        };
+      }
 
       return {
         name: name,
         apiType: api_type,
         apiUrl: api_url,
-        contractNetwork: network === 'null' ? null : network,
-        contractAddress: address === 'null' ? null : address,
-        chainId: CHAIN_IDS[network]
+        contractAddress: contract,
+        chainId: chain_id
       };
     }),
     executors: space.metadata.executors,

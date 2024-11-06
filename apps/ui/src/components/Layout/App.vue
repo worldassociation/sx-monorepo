@@ -168,7 +168,7 @@ router.afterEach(() => {
         `hidden lg:flex app-sidebar fixed inset-y-0`,
         { '!flex app-sidebar-open': uiStore.sideMenuOpen }
       ]" />
-      <AppTopnav v-if="hasTopNav" :has-app-nav="hasAppNav">
+      <AppTopnav :has-app-nav="hasAppNav" :class="{ hidden: !hasTopNav }">
         <template #toggle-sidebar-button>
           <button v-if="hasSwipeableContent" type="button" class="text-skin-link lg:hidden ml-4"
             @click="uiStore.toggleSidebar">
