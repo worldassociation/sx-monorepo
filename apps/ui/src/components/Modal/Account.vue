@@ -110,7 +110,7 @@ async function handleLogin(connector: string) {
         <template v-else>
           <button v-for="connector in availableConnectors" :key="connector.id" type="button"
             @click="handleLogin(connector.id)">
-            <UiButton class="w-full flex justify-center items-center gap-2" :loading="loading">
+            <UiButton class="w-full flex justify-center items-center gap-2">
               <img :src="getConnectorIconUrl(connector.icon)" height="28" width="28" :alt="connector.name" />
               {{ connector.name }}
             </UiButton>
@@ -120,9 +120,7 @@ async function handleLogin(connector: string) {
             <span class="mx-2 text-skin-content text-sm">OR</span>
             <div class="flex-grow border-t border-skin-border"></div>
           </div>
-          <UiButton :loading="loading" @click="handleLogin('walletlink')">
-            Sign up
-          </UiButton>
+          <UiButton @click="handleLogin('walletlink')"> Sign up </UiButton>
         </template>
       </template>
       <template v-else>
