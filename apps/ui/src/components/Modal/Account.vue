@@ -96,12 +96,10 @@ async function handleLogin(connector: string) {
     <div class="m-4 flex flex-col gap-2">
       <template v-if="isLoggedOut">
         <template v-if="!showConnectors">
-          <UiButton primary :loading="loading" @click="handleLogin('walletlink')">
+          <UiButton primary @click="handleLogin('walletlink')">
             Log in
           </UiButton>
-          <UiButton :loading="loading" @click="handleLogin('walletlink')">
-            Sign up
-          </UiButton>
+          <UiButton @click="handleLogin('walletlink')"> Sign up </UiButton>
           <div class="flex items-center my-1">
             <div class="flex-grow border-t border-skin-border"></div>
             <span class="mx-2 text-skin-content text-sm">OR</span>
