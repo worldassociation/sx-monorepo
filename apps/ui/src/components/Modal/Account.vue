@@ -26,7 +26,7 @@ const emit = defineEmits<{
 }>();
 
 const { open } = toRefs(props);
-const { web3, logout } = useWeb3();
+const { web3, logout, login } = useWeb3();
 const usersStore = useUsersStore();
 const step: Ref<'connect' | null> = ref(null);
 
@@ -57,6 +57,8 @@ const isLoggedOut = computed(
   () => !web3.value.account || step.value === 'connect'
 );
 
+const loading = ref(false);
+
 async function handleLogout() {
   await logout();
   emit('close');
@@ -69,20 +71,35 @@ const showConnectors = ref(false);
 function handleLoginClick() {
   showConnectors.value = !showConnectors.value;
 }
+
+async function handleLogin(connector: string) {
+  loading.value = true;
+  try {
+    await login(connector);
+    emit('close');
+  } finally {
+    loading.value = false;
+  }
+}
 </script>
 
 <template>
   <UiModal :open="open" @close="$emit('close')">
     <template #header>
-      <h3 v-text="isLoggedOut ? (showConnectors ? 'Connect wallet' : 'Log in') : 'Account'" />
+      <h3 v-text="isLoggedOut
+          ? showConnectors
+            ? 'Connect wallet'
+            : 'Log in'
+          : 'Account'
+        " />
     </template>
     <div class="m-4 flex flex-col gap-2">
       <template v-if="isLoggedOut">
         <template v-if="!showConnectors">
-          <UiButton primary @click="$emit('login', 'walletlink')">
+          <UiButton primary :loading="loading" @click="handleLogin('walletlink')">
             Log in
           </UiButton>
-          <UiButton @click="$emit('login', 'walletlink')">
+          <UiButton :loading="loading" @click="handleLogin('walletlink')">
             Sign up
           </UiButton>
           <div class="flex items-center my-1">
@@ -90,14 +107,12 @@ function handleLoginClick() {
             <span class="mx-2 text-skin-content text-sm">OR</span>
             <div class="flex-grow border-t border-skin-border"></div>
           </div>
-          <UiButton @click="handleLoginClick">
-            Connect wallet
-          </UiButton>
+          <UiButton @click="handleLoginClick"> Connect wallet </UiButton>
         </template>
         <template v-else>
           <button v-for="connector in availableConnectors" :key="connector.id" type="button"
-            @click="() => { $emit('login', connector.id); handleLoginClick() }">
-            <UiButton class="w-full flex justify-center items-center gap-2">
+            @click="handleLogin(connector.id)">
+            <UiButton class="w-full flex justify-center items-center gap-2" :loading="loading">
               <img :src="getConnectorIconUrl(connector.icon)" height="28" width="28" :alt="connector.name" />
               {{ connector.name }}
             </UiButton>
@@ -107,7 +122,7 @@ function handleLoginClick() {
             <span class="mx-2 text-skin-content text-sm">OR</span>
             <div class="flex-grow border-t border-skin-border"></div>
           </div>
-          <UiButton @click="() => { $emit('login', 'walletlink'); handleLoginClick() }">
+          <UiButton :loading="loading" @click="handleLogin('walletlink')">
             Sign up
           </UiButton>
         </template>
@@ -120,10 +135,18 @@ function handleLoginClick() {
         <UiButton :to="{ name: 'settings-spaces' }" @click="emit('close')">
           Settings
         </UiButton>
-        <UiButton @click="() => { step = 'connect'; showConnectors = true; }">
+        <UiButton @click="() => {
+            step = 'connect';
+            showConnectors = true;
+          }
+          ">
           {{ web3.account ? 'Change wallet' : 'Log in' }}
         </UiButton>
-        <UiButton class="!text-skin-danger" @click="() => { handleLogout(); handleLoginClick() }">
+        <UiButton class="!text-skin-danger" @click="() => {
+            handleLogout();
+            handleLoginClick();
+          }
+          ">
           Log out
         </UiButton>
       </template>
