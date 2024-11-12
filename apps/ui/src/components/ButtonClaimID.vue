@@ -206,7 +206,7 @@ watch(() => web3Account, initializeWidget, { immediate: true });
 
 <template>
   <span class="cursor-pointer text-skin-link" @click="launchWidget">
-    Global Voter ID
+    <span class="text-skin-text">Create your</span> Global Voter ID
   </span>
 
   <Teleport to="body">

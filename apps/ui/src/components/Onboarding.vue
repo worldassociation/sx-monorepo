@@ -2,7 +2,7 @@
 import { lsGet, lsSet } from '@/helpers/utils';
 import { ref, computed, watch, onMounted } from 'vue';
 import { ethers } from 'ethers';
-import { GLOBAL_VOTER_ID_ZKME_ADDRESS } from '../helpers/constants';
+import { GLOBAL_VOTER_ID_ZKME_ADDRESS, CFA_V1_FORWARDER_ABI, CFA_V1_FORWARDER_ADDRESS, DRACHMA_CONTRACT_ADDRESS } from '../helpers/constants';
 import ButtonClaimID from './ButtonClaimID.vue';
 
 const usersStore = useUsersStore();
@@ -46,9 +46,28 @@ async function fetchVoterIdBalance() {
 
 watch(() => web3.value.account, fetchVoterIdBalance, { immediate: true });
 
+const basicIncomeSetUp = ref(false);
+
+async function fetchBasicIncomeStatus() {
+  if (!web3.value.account) return;
+
+  try {
+    const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
+    const contract = new ethers.Contract(CFA_V1_FORWARDER_ADDRESS, CFA_V1_FORWARDER_ABI, provider);
+
+    const flowrate = await contract.getAccountFlowrate(DRACHMA_CONTRACT_ADDRESS, web3.value.account);
+    basicIncomeSetUp.value = flowrate.gt(ethers.constants.Zero);
+  } catch (error) {
+    console.error('Error fetching basic income status:', error);
+    basicIncomeSetUp.value = false;
+  }
+}
+
+watch(() => web3.value.account, fetchBasicIncomeStatus, { immediate: true });
+
 const tasks = computed(() => ({
   voterId: !voterIdBalance.value || parseFloat(voterIdBalance.value) === 0,
-  basicIncome: true,
+  basicIncome: !basicIncomeSetUp.value,
   following: !followedSpacesStore.isFollowed('s:worldassociation.eth'),
   votes: !user.value?.votesCount
 }));
@@ -78,7 +97,7 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
 </script>
 
 <template>
-  <div v-if="loading">
+  <div v-if="user && loading">
     <UiLabel label="onboarding" sticky class="mb-4" />
     <UiLoading class="p-4" />
   </div>
@@ -87,7 +106,6 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
     <div v-if="tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
-        Create your
         <ButtonClaimID />
       </div>
     </div>
@@ -102,8 +120,9 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
     <div v-if="tasks.following" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
-        Follow the
-        <AppLink :to="'/s:worldassociation.eth'"> World Association </AppLink>
+        <AppLink :to="'/s:worldassociation.eth'">
+          <span class="text-skin-text">Follow the</span> World Association
+        </AppLink>
       </div>
     </div>
 
@@ -115,10 +134,12 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
     <div v-if="!tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
-        Create a
-        <AppLink :to="'/s:polls.worldassociation.eth'"> poll </AppLink>
-        or start a
-        <AppLink :to="'/s:petitions.worldassociation.eth'"> petition </AppLink>
+        <AppLink :to="'/s:polls.worldassociation.eth'">
+          <span class="text-skin-text">Create a</span> poll
+        </AppLink>
+        <AppLink :to="'/s:petitions.worldassociation.eth'">
+          <span class="text-skin-text"> or start a</span> petition
+        </AppLink>
       </div>
     </div>
   </div>
