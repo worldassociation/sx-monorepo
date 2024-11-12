@@ -15,7 +15,7 @@ import { Space, UserActivity } from '@/types';
 const route = useRoute();
 const usersStore = useUsersStore();
 const spacesStore = useSpacesStore();
-const { web3 } = useWeb3();
+const { logout, web3 } = useWeb3();
 const { setTitle } = useTitle();
 const { copy, copied } = useClipboard();
 
@@ -118,61 +118,44 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
     <span>This user does not exist</span>
   </div>
   <div v-else>
-    <div
-      class="relative bg-skin-border h-[156px] md:h-[140px] mb-[-86px] md:mb-[-70px] top-[-1px]"
-    >
+    <div class="relative bg-skin-border h-[156px] md:h-[140px] mb-[-86px] md:mb-[-70px] top-[-1px]">
       <div class="size-full overflow-hidden">
         <UserCover :user="user" class="!rounded-none w-full min-h-full" />
       </div>
-      <div
-        class="relative bg-skin-bg h-[16px] -top-3 rounded-t-[16px] md:hidden"
-      />
+      <div class="relative bg-skin-bg h-[16px] -top-3 rounded-t-[16px] md:hidden" />
       <div class="absolute right-4 top-4 space-x-2 flex">
         <DropdownShare :shareable="user" type="user" class="!px-0 w-[46px]" />
-        <UiTooltip
-          v-if="compareAddresses(web3.account, user.id)"
-          title="Edit profile"
-        >
+        <UiTooltip v-if="compareAddresses(web3.account, user.id)" title="Edit profile">
           <UiButton class="!px-0 w-[46px]" @click="modalOpenEditUser = true">
             <IH-cog class="inline-block" />
+          </UiButton>
+        </UiTooltip>
+        <UiTooltip title="Logout">
+          <UiButton v-if="compareAddresses(web3.account, user.id)" class="!px-0 w-[46px]" @click="logout">
+            <IH-logout class="inline-block" />
           </UiButton>
         </UiTooltip>
       </div>
     </div>
     <div class="px-4">
       <div class="mb-5 relative">
-        <UiStamp
-          :id="user.id"
-          :size="90"
-          :cb="cb"
-          class="relative mb-2 border-[4px] border-skin-bg !bg-skin-border !rounded-full left-[-4px]"
-        />
+        <UiStamp :id="user.id" :size="90" :cb="cb"
+          class="relative mb-2 border-[4px] border-skin-bg !bg-skin-border !rounded-full left-[-4px]" />
         <h1 class="break-words" v-text="user.name || shortenAddress(user.id)" />
         <div class="mb-3 flex items-center space-x-2">
           <span class="text-skin-text" v-text="shortenAddress(user.id)" />
           <UiTooltip title="Copy address">
-            <button
-              type="button"
-              class="text-skin-text"
-              @click.prevent="copy(user.id)"
-            >
+            <button type="button" class="text-skin-text" @click.prevent="copy(user.id)">
               <IH-duplicate v-if="!copied" class="inline-block" />
               <IH-check v-else class="inline-block" />
             </button>
           </UiTooltip>
         </div>
-        <div
-          v-if="user.about"
-          class="max-w-[540px] text-skin-link text-md leading-[26px] mb-3 break-words"
-          v-html="autoLinkText(user.about)"
-        />
+        <div v-if="user.about" class="max-w-[540px] text-skin-link text-md leading-[26px] mb-3 break-words"
+          v-html="autoLinkText(user.about)" />
         <div v-if="socials.length" class="space-x-2 flex">
           <template v-for="social in socials" :key="social.key">
-            <a
-              :href="social.href"
-              target="_blank"
-              class="text-[#606060] hover:text-skin-link"
-            >
+            <a :href="social.href" target="_blank" class="text-[#606060] hover:text-skin-link">
               <component :is="social.icon" class="size-[26px]" />
             </a>
           </template>
@@ -188,65 +171,33 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
       </div>
     </div>
     <UiLoading v-if="loadingActivities" class="px-4 py-3 block" />
-    <div
-      v-else-if="!activities.length"
-      class="px-4 py-3 flex items-center space-x-2"
-    >
+    <div v-else-if="!activities.length" class="px-4 py-3 flex items-center space-x-2">
       <IH-exclamation-circle class="inline-block" />
       <span>This user does not have any activities yet.</span>
     </div>
-    <AppLink
-      v-for="(activity, i) in activities"
-      v-else
-      :key="i"
-      :to="{
-        name: 'space-user-statement',
-        params: {
-          space: activity.spaceId,
-          user: user.id
-        }
-      }"
-      class="mx-4 border-b flex space-x-1 py-3"
-    >
-      <div
-        class="flex items-center gap-x-3 leading-[22px] w-[60%] lg:w-[50%] font-semibold text-skin-link truncate"
-      >
-        <SpaceAvatar
-          :space="activity.space"
-          :size="32"
-          class="!rounded-[4px]"
-        />
+    <AppLink v-for="(activity, i) in activities" v-else :key="i" :to="{
+      name: 'space-user-statement',
+      params: {
+        space: activity.spaceId,
+        user: user.id
+      }
+    }" class="mx-4 border-b flex space-x-1 py-3">
+      <div class="flex items-center gap-x-3 leading-[22px] w-[60%] lg:w-[50%] font-semibold text-skin-link truncate">
+        <SpaceAvatar :space="activity.space" :size="32" class="!rounded-[4px]" />
         <span class="flex-auto w-0 truncate" v-text="activity.space.name" />
       </div>
-      <div
-        class="flex flex-col justify-center text-right w-[20%] lg:w-[25%] leading-[22px] truncate"
-      >
-        <h4
-          class="text-skin-link truncate"
-          v-text="_n(activity.proposal_count)"
-        />
-        <div
-          class="text-[17px] truncate"
-          v-text="_p(activity.proposal_percentage)"
-        />
+      <div class="flex flex-col justify-center text-right w-[20%] lg:w-[25%] leading-[22px] truncate">
+        <h4 class="text-skin-link truncate" v-text="_n(activity.proposal_count)" />
+        <div class="text-[17px] truncate" v-text="_p(activity.proposal_percentage)" />
       </div>
-      <div
-        class="flex flex-col justify-center text-right w-[20%] lg:w-[25%] leading-[22px] truncate"
-      >
+      <div class="flex flex-col justify-center text-right w-[20%] lg:w-[25%] leading-[22px] truncate">
         <h4 class="text-skin-link truncate" v-text="_n(activity.vote_count)" />
-        <div
-          class="text-[17px] truncate"
-          v-text="_p(activity.vote_percentage)"
-        />
+        <div class="text-[17px] truncate" v-text="_p(activity.vote_percentage)" />
       </div>
     </AppLink>
     <teleport to="#modal">
-      <ModalEditUser
-        v-if="compareAddresses(web3.account, user.id)"
-        :open="modalOpenEditUser"
-        :user="user"
-        @close="modalOpenEditUser = false"
-      />
+      <ModalEditUser v-if="compareAddresses(web3.account, user.id)" :open="modalOpenEditUser" :user="user"
+        @close="modalOpenEditUser = false" />
     </teleport>
   </div>
 </template>
