@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { explorePageProtocols } from '@/networks';
 import { ExplorePageProtocol, ProtocolConfig } from '@/networks/types';
+import { useScrollVisibility } from '@/composables/useScrollVisibility';
 
 useTitle('My spaces');
+
+const { isVisible, isMobile } = useScrollVisibility();
+
+const stickyHeaderClass = computed(() => {
+  if (!isMobile.value) return 'top-[112px]';
+  return isVisible.value ? 'top-[112px]' : 'top-[40px]';
+});
 
 const protocols = Object.values(explorePageProtocols).map(
   ({ key, label }: ProtocolConfig) => ({
@@ -56,31 +64,22 @@ watch(
 </script>
 
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between sticky bg-skin-bg z-40 transition-[top] duration-300" :class="stickyHeaderClass">
     <div class="flex flex-row p-4 space-x-2">
-      <UiSelectDropdown
-        v-model="spacesStore.protocol"
-        title="Protocol"
-        gap="12"
-        placement="start"
-        :items="protocols"
-      />
+      <UiSelectDropdown v-model="spacesStore.protocol" title="Protocol" gap="12" placement="start" :items="protocols" />
     </div>
   </div>
-  <UiLabel label="My spaces" sticky />
+
+  <UiLabel label="My spaces" :sticky-offset="72" class="transition-[top] duration-300" />
+
   <UiLoading v-if="loading" class="block m-4" />
-  <UiContainer
-    v-else-if="spacesStore.explorePageSpaces.length"
-    class="!max-w-screen-md pt-5"
-  >
+
+  <UiContainer v-else-if="spacesStore.explorePageSpaces.length" class="!max-w-screen-md pt-5">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-3">
-      <SpacesListItem
-        v-for="space in spacesStore.explorePageSpaces"
-        :key="space.id"
-        :space="space"
-      />
+      <SpacesListItem v-for="space in spacesStore.explorePageSpaces" :key="space.id" :space="space" />
     </div>
   </UiContainer>
+
   <div v-else class="px-4 py-3 flex items-center space-x-2">
     <IH-exclamation-circle class="inline-block shrink-0" />
     <span v-text="'There are no spaces here.'" />

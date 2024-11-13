@@ -98,11 +98,11 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
 
 <template>
   <div v-if="user && loading">
-    <UiLabel label="onboarding" sticky class="mb-4" />
+    <UiLabel label="onboarding" :sticky-offset="72" class="mb-4" />
     <UiLoading class="p-4" />
   </div>
   <div v-else-if="user && hasPendingTasks && isVoterIdBalanceLoaded">
-    <UiLabel label="onboarding" sticky />
+    <UiLabel label="onboarding" :sticky-offset="72" />
     <div v-if="tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">

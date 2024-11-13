@@ -156,6 +156,15 @@ watch(
 router.afterEach(() => {
   uiStore.sideMenuOpen = false;
 });
+
+const { isVisible, isMobile } = useScrollVisibility();
+
+watch([isVisible, isMobile], () => {
+  document.documentElement.style.setProperty(
+    '--header-height',
+    (!isVisible.value && isMobile.value) ? '0' : '72px'
+  );
+}, { immediate: true });
 </script>
 
 <template>
@@ -259,9 +268,9 @@ $placeholderSidebarWidth: 240px;
   @apply w-[#{$placeholderSidebarWidth}];
 
   &::before {
-    @apply block fixed border-l top-[72px] bottom-0 right-0 w-[#{$placeholderSidebarWidth}];
-
+    @apply block fixed border-l bottom-0 right-0 w-[#{$placeholderSidebarWidth}] transition-[top] duration-300;
     content: '';
+    top: var(--header-height, 72px);
   }
 }
 
