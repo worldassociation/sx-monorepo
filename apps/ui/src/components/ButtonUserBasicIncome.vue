@@ -274,11 +274,9 @@ const closeResultDialog = () => {
     <UiLoading :size="20" />
   </template>
   <template v-else-if="isBasicIncomeSetUp">
-    <UiTooltip title="View your basic income stream details">
-      <UiButton class="!px-0 w-[46px]" @click="showStreamModal = true">
-        <IH-banknotes class="inline-block" />
-      </UiButton>
-    </UiTooltip>
+    <UiButton class="!px-0 w-[46px]" @click="showStreamModal = true">
+      <IH-banknotes class="inline-block" />
+    </UiButton>
 
     <Teleport to="body">
       <ModalBasicIncomeStream :open="showStreamModal" :stream-url="getUserStreamLink"
