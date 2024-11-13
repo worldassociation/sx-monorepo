@@ -14,6 +14,7 @@ import {
 } from '../helpers/constants';
 import { Engine } from '@thirdweb-dev/engine';
 import '@zkmelabs/widget/dist/style.css'
+import ModalBasicIncomeStream from './Modal/BasicIncomeStream.vue';
 
 const {
   VITE_THIRDWEB_ENGINE_URL,
@@ -49,6 +50,7 @@ const isSuccess = ref(false);
 const isButtonDisabled = ref(false);
 const countdown = ref(8);
 const isLoading = ref(true);
+const showStreamModal = ref(false);
 
 const fetchFlowrateData = async () => {
   if (!web3Account.value) {
@@ -272,10 +274,16 @@ const closeResultDialog = () => {
     <UiLoading :size="20" />
   </template>
   <template v-else-if="isBasicIncomeSetUp">
-    <a :href="getUserStreamLink" target="_blank" rel="noopener noreferrer" class="items-center">
-      <span class="text-skin-text">Check your </span>basic income
-      <IH-arrow-sm-right class="inline-block text-skin-text mb-[2px] -rotate-45" />
-    </a>
+    <UiTooltip title="View your basic income stream details">
+      <UiButton class="!px-0 w-[46px]" @click="showStreamModal = true">
+        <IH-banknotes class="inline-block" />
+      </UiButton>
+    </UiTooltip>
+
+    <Teleport to="body">
+      <ModalBasicIncomeStream :open="showStreamModal" :stream-url="getUserStreamLink"
+        @close="showStreamModal = false" />
+    </Teleport>
   </template>
   <template v-else>
     <span class="cursor-pointer text-skin-link" @click="handleLaunchWidget">
