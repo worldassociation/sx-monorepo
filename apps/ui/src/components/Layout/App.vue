@@ -268,7 +268,7 @@ $placeholderSidebarWidth: 240px;
   @apply w-[#{$placeholderSidebarWidth}];
 
   &::before {
-    @apply block fixed border-l bottom-0 right-0 w-[#{$placeholderSidebarWidth}] transition-[top] duration-300;
+    @apply block fixed border-l bottom-0 right-0 w-[#{$placeholderSidebarWidth}] transition-[top] duration-200;
     content: '';
     top: var(--header-height, 72px);
   }

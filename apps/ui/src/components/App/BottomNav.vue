@@ -40,7 +40,7 @@ const menu = [
 </script>
 
 <template>
-  <nav class="fixed bottom-0 inset-x-0 z-50 bg-skin-bg border-t text-xs transition-transform duration-300"
+  <nav class="fixed bottom-0 inset-x-0 z-50 bg-skin-bg border-t text-xs transition-transform duration-200"
     :class="{ 'translate-y-full': !isVisible && isMobile }">
     <div class="flex px-4 justify-between">
       <AppLink v-for="(item, i) in menu" :key="i" :to="item.link"

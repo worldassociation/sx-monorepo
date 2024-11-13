@@ -30,7 +30,7 @@ onUnmounted(() => notificationsStore.markAllAsRead());
 
 <template>
   <div>
-    <UiLabel label="Notifications" :sticky-offset="72" class="transition-[top] duration-300"
+    <UiLabel label="Notifications" :sticky-offset="72" class="transition-[top] duration-200"
       :class="stickyHeaderClass" />
     <UiLoading v-if="notificationsStore.loading" class="block px-4 py-3" />
     <div v-else-if="notificationsStore.notifications.length">

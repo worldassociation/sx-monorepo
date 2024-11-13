@@ -121,7 +121,7 @@ watch([sortBy, choiceFilter], () => {
 </script>
 
 <template>
-  <div ref="votesHeader" class="bg-skin-bg sticky z-40 border-b overflow-hidden transition-[top] duration-300"
+  <div ref="votesHeader" class="bg-skin-bg sticky z-40 border-b overflow-hidden transition-[top] duration-200"
     :class="stickyHeaderClass">
     <div class="flex space-x-3 font-medium min-w-[735px]">
       <div class="ml-4 max-w-[218px] w-[218px] truncate">Voter</div>

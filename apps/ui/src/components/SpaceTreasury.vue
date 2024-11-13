@@ -174,7 +174,7 @@ const stickyTabsClass = computed(() => {
     </div>
     <div class="space-y-3">
       <div>
-        <UiLabel label="Treasury" :sticky-offset="72" class="transition-[top] duration-300" />
+        <UiLabel label="Treasury" :sticky-offset="72" class="transition-[top] duration-200" />
         <a :href="treasuryExplorerUrl || '#'" target="_blank"
           class="flex justify-between items-center mx-4 py-3 border-b" :class="{
             'pointer-events-none': !treasuryExplorerUrl
@@ -199,7 +199,7 @@ const stickyTabsClass = computed(() => {
         </a>
       </div>
       <div>
-        <div class="flex pl-4 border-b space-x-3 sticky bg-skin-bg z-40 transition-[top] duration-300"
+        <div class="flex pl-4 border-b space-x-3 sticky bg-skin-bg z-40 transition-[top] duration-200"
           :class="stickyTabsClass">
           <AppLink :to="{
             params: {
