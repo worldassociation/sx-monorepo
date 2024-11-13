@@ -48,12 +48,15 @@ const isProcessing = ref(false);
 const isSuccess = ref(false);
 const isButtonDisabled = ref(false);
 const countdown = ref(8);
+const isLoading = ref(true);
 
 const fetchFlowrateData = async () => {
   if (!web3Account.value) {
+    isLoading.value = false;
     return;
   }
 
+  isLoading.value = true;
   const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
   const contract = new ethers.Contract(CFA_V1_FORWARDER_ADDRESS, CFA_V1_FORWARDER_ABI, provider);
 
@@ -63,6 +66,8 @@ const fetchFlowrateData = async () => {
     isBasicIncomeSetUp.value = flowrate.gt(ethers.constants.Zero);
   } catch (error) {
     console.error('Error fetching flowrate:', error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -263,17 +268,19 @@ const closeResultDialog = () => {
 </script>
 
 <template>
-  <template v-if="isBasicIncomeSetUp">
-    <a :href="getUserStreamLink" target="_blank" rel="noopener noreferrer">
-      <UiButton class="!px-0 w-[46px]">
-        <IH-banknotes class="inline-block" />
-      </UiButton>
+  <template v-if="isLoading">
+    <UiLoading :size="20" />
+  </template>
+  <template v-else-if="isBasicIncomeSetUp">
+    <a :href="getUserStreamLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center">
+      Check your basic income
+      <IH-arrow-sm-right class="inline-block mb-[1px] ml-1 -rotate-45" />
     </a>
   </template>
   <template v-else>
-    <UiButton class="!px-0 w-[46px]" @click="handleLaunchWidget">
-      <IH-banknotes class="inline-block" />
-    </UiButton>
+    <span class="cursor-pointer text-skin-link" @click="handleLaunchWidget">
+      <span class="text-skin-text">Claim your</span> basic income
+    </span>
   </template>
 
   <Teleport to="body">

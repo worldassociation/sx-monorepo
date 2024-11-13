@@ -127,9 +127,6 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
         <UiTooltip title="Share">
           <DropdownShare :shareable="user" type="user" class="!px-0 w-[46px]" />
         </UiTooltip>
-        <UiTooltip v-if="compareAddresses(web3.account, user.id)" title="Basic income">
-          <ButtonUserBasicIncome />
-        </UiTooltip>
         <UiTooltip v-if="compareAddresses(web3.account, user.id)" title="Edit profile">
           <UiButton class="!px-0 w-[46px]" @click="modalOpenEditUser = true">
             <IH-cog class="inline-block" />
@@ -165,6 +162,11 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
             </a>
           </template>
         </div>
+      </div>
+
+      <div v-if="compareAddresses(web3.account, user.id)" class="mb-3">
+        <h4 class="mb-2 eyebrow leading-8">Basic Income</h4>
+        <ButtonUserBasicIncome />
       </div>
       <h4 class="mb-2 eyebrow leading-8">Activity</h4>
     </div>
