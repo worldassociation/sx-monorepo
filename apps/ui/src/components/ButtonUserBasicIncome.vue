@@ -272,14 +272,14 @@ const closeResultDialog = () => {
     <UiLoading :size="20" />
   </template>
   <template v-else-if="isBasicIncomeSetUp">
-    <a :href="getUserStreamLink" target="_blank" rel="noopener noreferrer" class="inline-flex items-center">
-      Check your basic income
-      <IH-arrow-sm-right class="inline-block mb-[1px] ml-1 -rotate-45" />
+    <a :href="getUserStreamLink" target="_blank" rel="noopener noreferrer" class="items-center">
+      <span class="text-skin-text">Check your </span>basic income
+      <IH-arrow-sm-right class="inline-block text-skin-text mb-[2px] -rotate-45" />
     </a>
   </template>
   <template v-else>
     <span class="cursor-pointer text-skin-link" @click="handleLaunchWidget">
-      <span class="text-skin-text">Claim your</span> basic income
+      <span class="text-skin-text">Claim your </span>basic income
     </span>
   </template>
 

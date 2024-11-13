@@ -11,6 +11,10 @@ import {
 import { addressValidator as isValidAddress } from '@/helpers/validation';
 import { enabledNetworks, getNetwork } from '@/networks';
 import { Space, UserActivity } from '@/types';
+import { ref, computed, watch } from 'vue';
+import { ethers } from 'ethers';
+import { GLOBAL_VOTER_ID_ZKME_ADDRESS } from '@/helpers/constants';
+import ButtonClaimID from '@/components/ButtonClaimID.vue';
 
 const route = useRoute();
 const usersStore = useUsersStore();
@@ -29,6 +33,8 @@ const activities = ref<
 const loadingActivities = ref(false);
 const modalOpenEditUser = ref(false);
 const loaded = ref(false);
+const voterIdBalance = ref<string | null>(null);
+const loadingVoterId = ref(true);
 
 const id = computed(() => route.params.user as string);
 
@@ -90,6 +96,24 @@ async function loadActivities(userId: string) {
   }
 }
 
+async function fetchVoterIdBalance(userId: string) {
+  try {
+    const provider = new ethers.providers.JsonRpcProvider('https://mainnet.base.org');
+    const abi = [
+      "function balanceOf(address owner) view returns (uint256)"
+    ];
+    const contract = new ethers.Contract(GLOBAL_VOTER_ID_ZKME_ADDRESS, abi, provider);
+
+    const balance = await contract.balanceOf(userId);
+    voterIdBalance.value = ethers.utils.formatUnits(balance, 18);
+  } catch (error) {
+    console.error('Error fetching voter ID balance:', error);
+    voterIdBalance.value = '0';
+  } finally {
+    loadingVoterId.value = false;
+  }
+}
+
 watch(
   id,
   async userId => {
@@ -104,6 +128,16 @@ watch(
     loadActivities(userId);
 
     loaded.value = true;
+  },
+  { immediate: true }
+);
+
+watch(
+  id,
+  userId => {
+    if (isValidAddress(userId)) {
+      fetchVoterIdBalance(userId);
+    }
   },
   { immediate: true }
 );
@@ -163,7 +197,19 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
           </template>
         </div>
       </div>
-
+      <div v-if="compareAddresses(web3.account, user.id)" class="mb-3">
+        <h4 class="mb-2 eyebrow leading-8">Proof of Personhood</h4>
+        <div v-if="loadingVoterId">
+          <UiLoading class="inline-block" />
+        </div>
+        <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
+          <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+        </div>
+        <div v-else class="flex items-center space-x-2">
+          <IH-check class="inline-block mb-[1px]" />
+          <ButtonClaimID :user="true" :done="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+        </div>
+      </div>
       <div v-if="compareAddresses(web3.account, user.id)" class="mb-3">
         <h4 class="mb-2 eyebrow leading-8">Basic Income</h4>
         <ButtonUserBasicIncome />

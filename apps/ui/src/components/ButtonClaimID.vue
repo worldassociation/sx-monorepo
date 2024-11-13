@@ -24,6 +24,11 @@ const resultDialogContent = ref({ title: '', description: '' });
 const isProcessing = ref(false);
 const widget = ref<ZkMeWidget | null>(null);
 
+const props = defineProps<{
+  user?: boolean;
+  done?: boolean;
+}>();
+
 async function fetchVoterIdBalance() {
   if (!web3Account.value) return;
 
@@ -211,7 +216,17 @@ watch(() => web3Account, initializeWidget, { immediate: true });
 
 <template>
   <span class="cursor-pointer text-skin-link" @click="launchWidget">
-    <span class="text-skin-text">Create your</span> Global Voter ID
+    <template v-if="props.user">
+      <template v-if="props.done">
+        <span class="text-skin-text">Verified with</span> zkMe
+      </template>
+      <template v-else>
+        <span class="text-skin-text">Get </span> zkMe <span class="text-skin-text">verification</span>
+      </template>
+    </template>
+    <template v-else>
+      <span class="text-skin-text">Create your</span> Global Voter ID
+    </template>
   </span>
 
   <Teleport to="body">
