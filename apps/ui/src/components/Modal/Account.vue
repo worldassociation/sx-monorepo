@@ -87,10 +87,10 @@ async function handleLogin(connector: string) {
   <UiModal :open="open" @close="$emit('close')">
     <template #header>
       <h3 v-text="isLoggedOut
-          ? showConnectors
-            ? 'Connect wallet'
-            : 'Log in'
-          : 'Account'
+        ? showConnectors
+          ? 'Connect wallet'
+          : 'Log in'
+        : 'Account'
         " />
     </template>
     <div class="m-4 flex flex-col gap-2">
@@ -132,16 +132,16 @@ async function handleLogin(connector: string) {
           Settings
         </UiButton>
         <UiButton @click="() => {
-            step = 'connect';
-            showConnectors = true;
-          }
+          step = 'connect';
+          showConnectors = true;
+        }
           ">
           {{ web3.account ? 'Change wallet' : 'Log in' }}
         </UiButton>
         <UiButton class="!text-skin-danger" @click="() => {
-            handleLogout();
-            handleLoginClick();
-          }
+          handleLogout();
+          handleLoginClick();
+        }
           ">
           Log out
         </UiButton>

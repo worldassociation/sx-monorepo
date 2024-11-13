@@ -32,57 +32,40 @@ const space = computed(() =>
 <template>
   <div v-bind="$attrs">
     <div class="space-x-2 flex">
-      <AppLink
-        :to="{
+      <AppLink :to="{
+        name: 'space-proposal-overview',
+        params: {
+          proposal: proposal.proposal_id,
+          space: `${proposal.network}:${proposal.space.id}`
+        }
+      }">
+        <ProposalIconStatus size="17" :state="proposal.state" class="top-1.5" />
+      </AppLink>
+
+      <div class="min-w-0 my-1 items-center leading-6">
+        <AppLink v-if="showSpace" :to="{
+          name: 'space-overview',
+          params: {
+            space: `${proposal.network}:${proposal.space.id}`
+          }
+        }" class="text-[21px] text-skin-text mr-2 font-bold inline shrink-0">
+          {{ proposal.space.name }}
+        </AppLink>
+
+        <AppLink :to="{
           name: 'space-proposal-overview',
           params: {
             proposal: proposal.proposal_id,
             space: `${proposal.network}:${proposal.space.id}`
           }
-        }"
-      >
-        <ProposalIconStatus size="17" :state="proposal.state" class="top-1.5" />
-      </AppLink>
-
-      <div class="min-w-0 my-1 items-center leading-6">
-        <AppLink
-          v-if="showSpace"
-          :to="{
-            name: 'space-overview',
-            params: {
-              space: `${proposal.network}:${proposal.space.id}`
-            }
-          }"
-          class="text-[21px] text-skin-text mr-2 font-bold inline shrink-0"
-        >
-          {{ proposal.space.name }}
-        </AppLink>
-
-        <AppLink
-          :to="{
-            name: 'space-proposal-overview',
-            params: {
-              proposal: proposal.proposal_id,
-              space: `${proposal.network}:${proposal.space.id}`
-            }
-          }"
-        >
-          <h3
-            class="text-[21px] inline [overflow-wrap:anywhere] mr-2 min-w-0"
-            v-text="proposal.title || `Proposal #${proposal.proposal_id}`"
-          />
-          <ProposalLabels
-            v-if="space?.labels && proposal.labels.length"
-            :labels="proposal.labels"
-            :space="space"
-            inline
-          />
-          <IH-check
-            v-if="
-              showVotedIndicator && votes[`${proposal.network}:${proposal.id}`]
-            "
-            class="text-skin-success inline-block shrink-0 relative"
-          />
+        }">
+          <h3 class="text-[21px] inline [overflow-wrap:anywhere] mr-2 min-w-0"
+            v-text="proposal.title || `Proposal #${proposal.proposal_id}`" />
+          <ProposalLabels v-if="space?.labels && proposal.labels.length" :labels="proposal.labels" :space="space"
+            inline />
+          <IH-check v-if="
+            showVotedIndicator && votes[`${proposal.network}:${proposal.id}`]
+          " class="text-skin-success inline-block shrink-0 relative" />
         </AppLink>
       </div>
     </div>
@@ -90,16 +73,13 @@ const space = computed(() =>
       {{ getProposalId(proposal) }}
       <template v-if="showAuthor">
         by
-        <AppLink
-          class="text-skin-text"
-          :to="{
-            name: 'space-user-statement',
-            params: {
-              space: `${proposal.network}:${proposal.space.id}`,
-              user: proposal.author.id
-            }
-          }"
-        >
+        <AppLink class="text-skin-text" :to="{
+          name: 'space-user-statement',
+          params: {
+            space: `${proposal.network}:${proposal.space.id}`,
+            user: proposal.author.id
+          }
+        }">
           {{ proposal.author.name || shortenAddress(proposal.author.id) }}
         </AppLink>
       </template>
@@ -113,19 +93,11 @@ const space = computed(() =>
         · {{ _p(totalProgress) }} {{ quorumLabel(proposal.quorum_type) }}
       </span>
       ·
-      <button
-        type="button"
-        class="text-skin-text"
-        @click="modalOpenTimeline = true"
-        v-text="_rt(getTsFromCurrent(proposal.network, proposal.max_end))"
-      />
+      <button type="button" class="text-skin-text" @click="modalOpenTimeline = true"
+        v-text="_rt(getTsFromCurrent(proposal.network, proposal.max_end))" />
     </span>
   </div>
   <teleport to="#modal">
-    <ModalTimeline
-      :open="modalOpenTimeline"
-      :proposal="proposal"
-      @close="modalOpenTimeline = false"
-    />
+    <ModalTimeline :open="modalOpenTimeline" :proposal="proposal" @close="modalOpenTimeline = false" />
   </teleport>
 </template>

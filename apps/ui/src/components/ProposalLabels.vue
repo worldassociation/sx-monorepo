@@ -22,20 +22,10 @@ const validLabels = computed(() => {
 </script>
 <template>
   <div v-if="inline" class="inline space-y-1">
-    <UiProposalLabel
-      v-for="label in validLabels"
-      :key="label.id"
-      :label="label.name"
-      :color="label.color"
-      v-bind="$attrs"
-      class="inline-flex !max-w-[160px] mr-1 last:mr-0"
-    />
+    <UiProposalLabel v-for="label in validLabels" :key="label.id" :label="label.name" :color="label.color"
+      v-bind="$attrs" class="inline-flex !max-w-[160px] mr-1 last:mr-0" />
   </div>
-  <ul
-    v-else-if="validLabels.length"
-    class="flex flex-wrap gap-1"
-    v-bind="$attrs"
-  >
+  <ul v-else-if="validLabels.length" class="flex flex-wrap gap-1" v-bind="$attrs">
     <li v-for="label in validLabels" :key="label.id">
       <UiTooltip :title="label.description" class="inline">
         <UiProposalLabel :label="label.name" :color="label.color" />

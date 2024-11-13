@@ -31,12 +31,12 @@ const remarkable = new Remarkable({
     if (lang && hljs.getLanguage(lang)) {
       try {
         return hljs.highlight(str, { language: lang }).value;
-      } catch (e) {}
+      } catch (e) { }
     }
 
     try {
       return hljs.highlightAuto(str).value;
-    } catch (e) {}
+    } catch (e) { }
 
     return '';
   }
@@ -136,11 +136,11 @@ html.dark {
   word-wrap: break-word;
   color: var(--content);
 
-  > *:first-child {
+  >*:first-child {
     margin-top: 0 !important;
   }
 
-  > *:last-child {
+  >*:last-child {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
   }
@@ -153,6 +153,7 @@ html.dark {
     color: inherit;
     text-decoration: none;
   }
+
   img[alt^='discourse-emoji'] {
     display: inline;
     width: 20px;
@@ -164,6 +165,7 @@ html.dark {
     width: 35px;
     height: 35px;
   }
+
   p,
   blockquote,
   ul,
@@ -261,11 +263,11 @@ html.dark {
     word-wrap: break-all;
   }
 
-  li > p {
+  li>p {
     margin-top: 16px;
   }
 
-  li + li {
+  li+li {
     margin-top: 0.25em;
   }
 

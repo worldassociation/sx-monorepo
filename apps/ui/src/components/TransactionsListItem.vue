@@ -15,9 +15,8 @@ const network = computed(() => {
 
 const title = computed(() => {
   if (props.tx._type === 'sendToken') {
-    return `Send <b>${_n(formatUnits(props.tx._form.amount, props.tx._form.token.decimals), 'standard', { formatDust: true })}</b> ${
-      props.tx._form.token.symbol
-    } to <b>_NAME_</b>`;
+    return `Send <b>${_n(formatUnits(props.tx._form.amount, props.tx._form.token.decimals), 'standard', { formatDust: true })}</b> ${props.tx._form.token.symbol
+      } to <b>_NAME_</b>`;
   }
 
   if (props.tx._type === 'sendNft') {
@@ -161,10 +160,7 @@ const parsedTitle = computedAsync(
       <div class="shrink-0">
         <slot name="left" />
       </div>
-      <button
-        class="flex gap-2 truncate items-center flex-auto"
-        @click="expanded = !expanded"
-      >
+      <button class="flex gap-2 truncate items-center flex-auto" @click="expanded = !expanded">
         <IH-cash v-if="tx._type === 'sendToken'" class="shrink-0" />
         <IH-photograph v-else-if="tx._type === 'sendNft'" class="shrink-0" />
         <IC-stake v-else-if="tx._type === 'stakeToken'" class="shrink-0" />
@@ -180,22 +176,15 @@ const parsedTitle = computedAsync(
           call.name
         }}</code>
         on
-        <a
-          class="inline-flex items-center"
-          target="_blank"
-          :href="network.helpers.getExplorerUrl(call.to, 'address')"
-        >
+        <a class="inline-flex items-center" target="_blank" :href="network.helpers.getExplorerUrl(call.to, 'address')">
           {{ shorten(call.to) }}
           <IH-arrow-sm-right class="inline-block ml-1 -rotate-45" />
         </a>
       </div>
       <div v-else-if="interaction" class="text-skin-link">
         Interaction with
-        <a
-          class="inline-flex items-center"
-          target="_blank"
-          :href="network.helpers.getExplorerUrl(interaction.to, 'address')"
-        >
+        <a class="inline-flex items-center" target="_blank"
+          :href="network.helpers.getExplorerUrl(interaction.to, 'address')">
           {{ shorten(interaction.to) }}
           <IH-arrow-sm-right class="inline-block ml-1 -rotate-45" />
         </a>
@@ -204,12 +193,8 @@ const parsedTitle = computedAsync(
         <h4 class="font-medium mt-3">Parameters</h4>
         <div v-for="param in params" :key="param.name" class="flex space-x-2">
           <span class="text-skin-link">{{ param.name }}</span>
-          <a
-            v-if="param.type === 'address'"
-            class="inline-flex items-center"
-            target="_blank"
-            :href="network.helpers.getExplorerUrl(param.value, 'address')"
-          >
+          <a v-if="param.type === 'address'" class="inline-flex items-center" target="_blank"
+            :href="network.helpers.getExplorerUrl(param.value, 'address')">
             {{ shorten(param.value) }}
             <IH-arrow-sm-right class="inline-block ml-1 -rotate-45" />
           </a>

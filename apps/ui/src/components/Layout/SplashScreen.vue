@@ -24,10 +24,7 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col justify-center items-center h-screen gap-5">
-    <IC-zap
-      class="size-[120px] fill-skin-border"
-      :class="{ 'animate-pulse': !failed }"
-    />
+    <IC-zap class="size-[120px] fill-skin-border" :class="{ 'animate-pulse': !failed }" />
     <div v-if="failed" class="text-center space-y-3">
       <div class="text-skin-text">Error while loading the app</div>
       <UiButton class="!text-skin-text" @click="handleReloadClick">

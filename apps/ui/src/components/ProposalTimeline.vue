@@ -99,28 +99,15 @@ const states: ComputedRef<State[]> = computed(() => {
 <template>
   <div class="flex">
     <div class="mt-1 ml-2">
-      <div
-        v-for="(state, i) in states"
-        :key="state.id"
-        class="flex relative h-[60px]"
-      >
-        <div
-          class="absolute size-[15px] inline-block rounded-full left-[-7px] border-4 border-skin-bg"
-          :class="state.value <= now ? 'bg-skin-heading' : 'bg-skin-border'"
-        />
-        <div
-          v-if="states[i + 1]"
-          class="border-l pr-4 mt-3"
-          :class="states[i + 1].value <= now && 'border-skin-heading'"
-        />
+      <div v-for="(state, i) in states" :key="state.id" class="flex relative h-[60px]">
+        <div class="absolute size-[15px] inline-block rounded-full left-[-7px] border-4 border-skin-bg"
+          :class="state.value <= now ? 'bg-skin-heading' : 'bg-skin-border'" />
+        <div v-if="states[i + 1]" class="border-l pr-4 mt-3"
+          :class="states[i + 1].value <= now && 'border-skin-heading'" />
       </div>
     </div>
     <div class="flex-auto leading-6">
-      <div
-        v-for="state in states"
-        :key="state.id"
-        class="mb-3 last:mb-0 h-[44px]"
-      >
+      <div v-for="state in states" :key="state.id" class="mb-3 last:mb-0 h-[44px]">
         <h4 v-text="LABELS[state.id]" />
         {{ _t(state.value) }}
       </div>

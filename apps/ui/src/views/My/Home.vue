@@ -154,13 +154,6 @@ onUnmounted(() => {
       ]" />
     </div>
   </div>
-  <ProposalsList
-    title="Proposals"
-    limit="off"
-    :loading="!followedSpacesStore.followedSpacesLoaded || !loaded"
-    :loading-more="loadingMore"
-    :proposals="proposals"
-    show-space
-    @end-reached="handleEndReached"
-  />
+  <ProposalsList title="Proposals" limit="off" :loading="!followedSpacesStore.followedSpacesLoaded || !loaded"
+    :loading-more="loadingMore" :proposals="proposals" show-space @end-reached="handleEndReached" />
 </template>

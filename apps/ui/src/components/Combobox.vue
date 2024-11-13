@@ -63,28 +63,16 @@ watch(model, () => {
 </script>
 
 <template>
-  <UiWrapperInput
-    :definition="definition"
-    :error="error"
-    :dirty="dirty"
-    class="relative mb-[14px]"
-  >
+  <UiWrapperInput :definition="definition" :error="error" :dirty="dirty" class="relative mb-[14px]">
     <Combobox v-slot="{ open }" v-model="inputValue" as="div" nullable>
       <Float adaptive-width strategy="fixed" placement="bottom-end">
         <div>
           <ComboboxButton class="w-full">
-            <ComboboxInput
-              class="s-input !flex items-center justify-between !mb-0"
-              :class="{
-                '!rounded-b-none': open
-              }"
-              autocomplete="off"
-              :placeholder="definition.examples?.[0]"
-              :display-value="item => getDisplayValue(item as T)"
-              @keydown.enter="() => (query = '')"
-              @change="e => (query = e.target.value)"
-              @focus="event => handleFocus(event, open)"
-            />
+            <ComboboxInput class="s-input !flex items-center justify-between !mb-0" :class="{
+              '!rounded-b-none': open
+            }" autocomplete="off" :placeholder="definition.examples?.[0]"
+              :display-value="item => getDisplayValue(item as T)" @keydown.enter="() => (query = '')"
+              @change="e => (query = e.target.value)" @focus="event => handleFocus(event, open)" />
           </ComboboxButton>
           <ComboboxButton class="absolute right-3 bottom-[14px]">
             <IH-chevron-up v-if="open" />
@@ -92,37 +80,23 @@ watch(model, () => {
           </ComboboxButton>
         </div>
         <ComboboxOptions
-          class="w-full bg-skin-border rounded-b-lg border-t-skin-text/10 border shadow-xl overflow-hidden"
-        >
+          class="w-full bg-skin-border rounded-b-lg border-t-skin-text/10 border shadow-xl overflow-hidden">
           <div class="max-h-[208px] overflow-y-auto">
-            <div
-              v-if="filteredOptions.length === 0 && query !== ''"
-              class="relative cursor-default select-none text-center py-2"
-            >
+            <div v-if="filteredOptions.length === 0 && query !== ''"
+              class="relative cursor-default select-none text-center py-2">
               No result for your search query
             </div>
 
-            <ComboboxOption
-              v-for="item in filteredOptions"
-              v-slot="{ selected, disabled, active }"
-              :key="item.id ?? NULL_SYMBOL"
-              :value="item.id"
-              as="template"
-            >
-              <li
-                class="flex items-center justify-between px-3"
-                :class="{
-                  'bg-skin-bg/25': active
-                }"
-              >
+            <ComboboxOption v-for="item in filteredOptions" v-slot="{ selected, disabled, active }"
+              :key="item.id ?? NULL_SYMBOL" :value="item.id" as="template">
+              <li class="flex items-center justify-between px-3" :class="{
+                'bg-skin-bg/25': active
+              }">
                 <component :is="item.icon" class="size-[20px] mr-2" />
-                <span
-                  class="w-full py-2 text-skin-link"
-                  :class="{
-                    'opacity-40': disabled,
-                    'cursor-pointer': !disabled
-                  }"
-                >
+                <span class="w-full py-2 text-skin-link" :class="{
+                  'opacity-40': disabled,
+                  'cursor-pointer': !disabled
+                }">
                   {{ item.name || item.id }}
                 </span>
                 <IH-check v-if="selected" class="text-skin-success" />

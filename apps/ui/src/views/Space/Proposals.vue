@@ -85,65 +85,46 @@ watchEffect(() => setTitle(`Proposals - ${props.space.name}`));
   <div>
     <div class="flex justify-between p-4 gap-2">
       <div class="flex gap-2">
-        <UiSelectDropdown
-          v-model="state"
-          title="Status"
-          gap="12"
-          placement="start"
-          :items="[
-            {
-              key: 'any',
-              label: 'Any'
-            },
-            {
-              key: 'pending',
-              label: 'Pending',
-              component: ProposalIconStatus,
-              componentProps: { ...selectIconBaseProps, state: 'pending' }
-            },
-            {
-              key: 'active',
-              label: 'Active',
-              component: ProposalIconStatus,
-              componentProps: { ...selectIconBaseProps, state: 'active' }
-            },
-            {
-              key: 'closed',
-              label: 'Closed',
-              component: ProposalIconStatus,
-              componentProps: { ...selectIconBaseProps, state: 'passed' }
-            }
-          ]"
-        />
+        <UiSelectDropdown v-model="state" title="Status" gap="12" placement="start" :items="[
+          {
+            key: 'any',
+            label: 'Any'
+          },
+          {
+            key: 'pending',
+            label: 'Pending',
+            component: ProposalIconStatus,
+            componentProps: { ...selectIconBaseProps, state: 'pending' }
+          },
+          {
+            key: 'active',
+            label: 'Active',
+            component: ProposalIconStatus,
+            componentProps: { ...selectIconBaseProps, state: 'active' }
+          },
+          {
+            key: 'closed',
+            label: 'Closed',
+            component: ProposalIconStatus,
+            componentProps: { ...selectIconBaseProps, state: 'passed' }
+          }
+        ]" />
       </div>
       <div class="flex gap-2 truncate">
-        <IndicatorVotingPower
-          :network-id="space.network"
-          :voting-power="votingPower"
-          @fetch-voting-power="handleFetchVotingPower"
-        />
+        <IndicatorVotingPower :network-id="space.network" :voting-power="votingPower"
+          @fetch-voting-power="handleFetchVotingPower" />
         <UiTooltip title="New proposal">
-          <UiButton
-            :to="{
-              name: 'space-editor',
-              params: { space: `${space.network}:${space.id}` }
-            }"
-            class="!px-0 w-[46px]"
-          >
+          <UiButton :to="{
+            name: 'space-editor',
+            params: { space: `${space.network}:${space.id}` }
+          }" class="!px-0 w-[46px]">
             <IH-pencil-alt />
           </UiButton>
         </UiTooltip>
       </div>
     </div>
-    <ProposalsList
-      title="Proposals"
-      limit="off"
-      :loading="!proposalsRecord?.loaded"
-      :loading-more="proposalsRecord?.loadingMore"
-      :proposals="
-        proposalsStore.getSpaceProposals(props.space.id, props.space.network)
-      "
-      @end-reached="handleEndReached"
-    />
+    <ProposalsList title="Proposals" limit="off" :loading="!proposalsRecord?.loaded"
+      :loading-more="proposalsRecord?.loadingMore" :proposals="proposalsStore.getSpaceProposals(props.space.id, props.space.network)
+        " @end-reached="handleEndReached" />
   </div>
 </template>
