@@ -106,7 +106,7 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
     <div v-if="tasks.voterId" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
-        <ButtonClaimID />
+        <ButtonClaimID @voter-id-claimed="balance => voterIdBalance = balance" />
       </div>
     </div>
 

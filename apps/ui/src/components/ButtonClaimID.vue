@@ -161,6 +161,10 @@ async function mintMembershipZkMe(address: string) {
   }
 }
 
+const emit = defineEmits<{
+  (e: 'voter-id-claimed', balance: string): void;
+}>();
+
 const mintMembership = async () => {
   if (
     !web3Account ||
@@ -186,6 +190,7 @@ const mintMembership = async () => {
       title: 'Success',
       description: 'Your Global Voter ID has been successfully created!'
     };
+    emit('voter-id-claimed', '1');
   } catch (error) {
     console.error('Error minting membership SBT:', error);
     resultDialogContent.value = {
