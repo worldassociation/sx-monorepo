@@ -3,6 +3,7 @@ import { clone, getSalt } from '@/helpers/utils';
 import { enabledReadWriteNetworks, getNetwork } from '@/networks';
 import { StrategyConfig } from '@/networks/types';
 import { NetworkID, SpaceMetadata, SpaceSettings } from '@/types';
+import { useScrollVisibility } from '@/composables/useScrollVisibility';
 
 const PAGES = [
   {
@@ -44,6 +45,7 @@ type PageID = (typeof PAGES)[number]['id'];
 const { setTitle } = useTitle();
 const { predictSpaceAddress } = useActions();
 const { web3 } = useWeb3();
+const { isVisible, isMobile } = useScrollVisibility();
 
 const pagesRefs = ref([] as HTMLElement[]);
 const sending = ref(false);
@@ -112,6 +114,11 @@ const submitDisabled = computed(() =>
   PAGES.some(page => !validatePage(page.id))
 );
 
+const stickyNavClass = computed(() => {
+  if (!isMobile.value) return 'top-[72px]';
+  return isVisible.value ? 'top-[72px]' : 'top-0';
+});
+
 function validatePage(page: PageID) {
   if (page === 'strategies') return votingStrategies.value.length > 0;
   if (page === 'auths') return authenticators.value.length > 0;
@@ -175,7 +182,8 @@ watchEffect(() => setTitle('Create space'));
       :execution-strategies="executionStrategies" :controller="controller" />
     <div v-else class="pt-5 flex max-w-[50rem] mx-auto px-4">
       <div
-        class="flex fixed lg:sticky top-[72px] inset-x-0 p-3 border-b z-10 bg-skin-bg lg:top-auto lg:inset-x-auto lg:p-0 lg:pr-5 lg:border-0 lg:flex-col gap-1 min-w-[180px] overflow-auto">
+        class="flex fixed lg:sticky inset-x-0 p-3 border-b z-10 bg-skin-bg lg:inset-x-auto lg:p-0 lg:pr-5 lg:border-0 lg:flex-col gap-1 min-w-[180px] overflow-auto transition-[top] duration-200"
+        :class="stickyNavClass">
         <button v-for="page in PAGES" ref="pagesRefs" :key="page.id" type="button" :disabled="!accessiblePages[page.id]"
           class="px-3 py-1 block lg:w-full rounded text-left scroll-mr-3 first:ml-auto last:mr-auto whitespace-nowrap"
           :class="{
@@ -209,7 +217,7 @@ watchEffect(() => setTitle('Create space'));
             :network-id="selectedNetworkId" :available-strategies="selectedNetwork.constants.EDITOR_PROPOSAL_VALIDATIONS
               " :available-voting-strategies="selectedNetwork.constants
                 .EDITOR_PROPOSAL_VALIDATION_VOTING_STRATEGIES
-              " title="Proposal validation"
+                " title="Proposal validation"
             description="Proposal validation strategies are used to determine if a user is allowed to create a proposal." />
           <FormStrategies v-else-if="currentPage === 'executions'" v-model="executionStrategies"
             :network-id="selectedNetworkId" :available-strategies="selectedNetwork.constants.EDITOR_EXECUTION_STRATEGIES
