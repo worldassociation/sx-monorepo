@@ -41,8 +41,10 @@ watchEffect(() => setTitle('Explore'));
 </script>
 
 <template>
-  <div class="flex">
-    <div class="flex-auto" />
+  <div class="flex justify-between">
+    <div class="flex flex-row p-4 space-x-2">
+      <UiSelectDropdown v-model="protocol" title="Protocol" gap="12" placement="start" :items="protocols" />
+    </div>
     <div class="pt-4 px-4 space-x-2">
       <UiButton class="!px-0 w-[46px]" @click="$router.push('/create')">
         <IH-plus-sm class="inline-block" />
