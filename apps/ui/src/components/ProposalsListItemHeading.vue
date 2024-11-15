@@ -2,6 +2,7 @@
 import { quorumLabel, quorumProgress } from '@/helpers/quorum';
 import { _n, _p, _rt, getProposalId, shortenAddress } from '@/helpers/utils';
 import { Proposal as ProposalType } from '@/types';
+import SpaceAvatar from './SpaceAvatar.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -32,15 +33,20 @@ const space = computed(() =>
 <template>
   <div v-bind="$attrs">
     <div class="space-x-2 flex">
-      <AppLink :to="{
-        name: 'space-proposal-overview',
-        params: {
-          proposal: proposal.proposal_id,
-          space: `${proposal.network}:${proposal.space.id}`
-        }
-      }">
-        <ProposalIconStatus size="17" :state="proposal.state" class="top-1.5" />
-      </AppLink>
+      <div class="flex flex-shrink-0 mr-1">
+        <SpaceAvatar v-if="$route.path === '/home'"
+          :space="{ id: proposal.space.id, avatar: proposal.space.avatar, network: proposal.network }" :size="32"
+          class="my-1.5" />
+        <AppLink :to="{
+          name: 'space-proposal-overview',
+          params: {
+            proposal: proposal.proposal_id,
+            space: `${proposal.network}:${proposal.space.id}`
+          }
+        }">
+          <ProposalIconStatus size="17" :state="proposal.state" class="top-1.5" />
+        </AppLink>
+      </div>
 
       <div class="min-w-0 my-1 items-center leading-6">
         <AppLink v-if="showSpace" :to="{
