@@ -41,7 +41,7 @@ watchEffect(() => setTitle('Explore'));
 </script>
 
 <template>
-  <UiLabel label="Spaces" />
+  <UiLabel label="Explore" />
   <UiLoading v-if="spacesStore.loading" class="block m-4" />
   <div v-else-if="spacesStore.loaded">
     <UiContainerInfiniteScroll v-if="spacesStore.explorePageSpaces.length" :loading-more="spacesStore.loadingMore"
