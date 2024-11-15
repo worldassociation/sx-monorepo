@@ -8,7 +8,7 @@ const STEPS = [
   {
     title: 'Join',
     about:
-      'Claim your Global Voter ID, set up your basic income, and join conversations on global issues – all while preserving your privacy by default.',
+      'Create a Global Voter ID, set up your basic income, and join conversations on global issues – all while preserving your privacy by default.',
     icon: ISUserPlus
   },
   {
@@ -36,6 +36,7 @@ const STEPS = [
   <div id="community" class="pt-8">
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px] text-center mx-auto">
+        <div class="eyebrow mb-3">An Association</div>
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
           A democratic community open to all
         </h1>
