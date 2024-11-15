@@ -37,6 +37,9 @@ onUnmounted(() => notificationsStore.markAllAsRead());
       <div v-for="(notification, i) in notificationsStore.notifications" :key="i">
         <div class="border-b px-4 py-[14px] flex space-x-3" :class="{ 'bg-skin-border/20': notification.unread }">
           <div>
+            <SpaceAvatar
+              :space="{ id: notification.proposal.space.id, avatar: notification.proposal.space.avatar, network: notification.proposal.network }"
+              :size="32" class="mr-2" />
             <AppLink :to="{
               name: 'space-overview',
               params: {
