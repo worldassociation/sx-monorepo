@@ -33,7 +33,7 @@ const space = computed(() =>
 <template>
   <div v-bind="$attrs">
     <div class="space-x-2 flex">
-      <div class="flex flex-shrink-0 mr-1">
+      <div class="flex flex-shrink-0">
         <SpaceAvatar v-if="$route.path === '/home'"
           :space="{ id: proposal.space.id, avatar: proposal.space.avatar, network: proposal.network }" :size="32"
           class="my-1.5" />
@@ -43,12 +43,12 @@ const space = computed(() =>
             proposal: proposal.proposal_id,
             space: `${proposal.network}:${proposal.space.id}`
           }
-        }">
-          <ProposalIconStatus size="17" :state="proposal.state" class="top-1.5" />
+        }" :class="$route.path === '/home' ? 'relative top-[20px] right-[8px] -mr-2' : ''">
+          <ProposalIconStatus size="16" :state="proposal.state" class="top-1.5" />
         </AppLink>
       </div>
 
-      <div class="min-w-0 my-1 items-center leading-6">
+      <div class="min-w-0 my-1.5 items-center leading-6">
         <AppLink v-if="showSpace" :to="{
           name: 'space-overview',
           params: {
