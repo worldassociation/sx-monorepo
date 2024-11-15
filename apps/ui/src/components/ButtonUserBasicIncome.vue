@@ -273,20 +273,30 @@ const closeResultDialog = () => {
   <template v-if="isLoading">
     <UiLoading :size="20" />
   </template>
-  <template v-else-if="isBasicIncomeSetUp">
-    <UiButton class="!px-0 w-[46px]" @click="showStreamModal = true">
-      <IH-banknotes class="inline-block" />
-    </UiButton>
+  <template v-else>
+    <span class="cursor-pointer text-skin-link flex items-center gap-2">
+      <template v-if="isBasicIncomeSetUp">
+        <div class="flex items-center gap-2 cursor-pointer" @click="showStreamModal = true">
+          <UiButton class="!px-0 w-[46px]">
+            <IH-banknotes class="inline-block" />
+          </UiButton>
+          <span class="text-skin-text">Basic income <span class="text-skin-link">active</span></span>
+        </div>
+      </template>
+      <template v-else>
+        <div class="flex items-center gap-2 cursor-pointer" @click="handleLaunchWidget">
+          <UiButton class="!px-0 w-[46px]">
+            <IH-plus class="inline-block" />
+          </UiButton>
+          <span class="text-skin-text">Claim your <span class="text-skin-link">basic income</span></span>
+        </div>
+      </template>
+    </span>
 
     <Teleport to="body">
       <ModalBasicIncomeStream :open="showStreamModal" :stream-url="getUserStreamLink"
         @close="showStreamModal = false" />
     </Teleport>
-  </template>
-  <template v-else>
-    <span class="cursor-pointer text-skin-link" @click="handleLaunchWidget">
-      <span class="text-skin-text">Claim your </span>basic income
-    </span>
   </template>
 
   <Teleport to="body">

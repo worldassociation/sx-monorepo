@@ -206,7 +206,6 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
           <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
         </div>
         <div v-else class="flex items-center space-x-2">
-          <IH-check class="inline-block mb-[1px]" />
           <ButtonClaimID :user="true" :done="true" @voter-id-claimed="balance => voterIdBalance = balance" />
         </div>
       </div>
