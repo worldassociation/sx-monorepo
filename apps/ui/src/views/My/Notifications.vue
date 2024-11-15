@@ -39,7 +39,7 @@ onUnmounted(() => notificationsStore.markAllAsRead());
           <div>
             <SpaceAvatar
               :space="{ id: notification.proposal.space.id, avatar: notification.proposal.space.avatar, network: notification.proposal.network }"
-              :size="32" class="mr-2" />
+              :size="32" class="mr-2 mb-1" />
             <AppLink :to="{
               name: 'space-overview',
               params: {
@@ -51,13 +51,12 @@ onUnmounted(() => notificationsStore.markAllAsRead());
             proposal has {{ notification.type }}
             {{ _rt(notification.timestamp) }}
             <AppLink :to="{
-              name: 'space-proposal-overview',
-              params: {
+              name: 'space-proposal-overview', params: {
                 proposal: notification.proposal.proposal_id,
                 space: `${notification.proposal.network}:${notification.proposal.space.id}`
               }
             }">
-              <h3 class="font-normal text-[21px] [overflow-wrap:anywhere]"
+              <h3 class="font-normal text-[20px] [overflow-wrap:anywhere]"
                 v-text="notification.proposal.title || `#${notification.proposal.proposal_id}`" />
             </AppLink>
           </div>
