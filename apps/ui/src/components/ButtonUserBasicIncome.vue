@@ -280,7 +280,7 @@ const closeResultDialog = () => {
           <UiButton class="!px-0 w-[46px]">
             <IH-banknotes class="inline-block" />
           </UiButton>
-          <span class="text-skin-text">Basic income <span class="text-skin-link">active</span></span>
+          <span class="text-skin-link">Basic income <span class="text-skin-text">active</span></span>
         </div>
       </template>
       <template v-else>
