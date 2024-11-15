@@ -35,26 +35,25 @@ const space = computed(() =>
     <div class="space-x-2 flex">
       <div class="flex flex-shrink-0">
         <SpaceAvatar v-if="$route.path === '/home'"
-          :space="{ id: proposal.space.id, avatar: proposal.space.avatar, network: proposal.network }" :size="32"
-          class="my-1.5" />
+          :space="{ id: proposal.space.id, avatar: proposal.space.avatar, network: proposal.network }" :size="40"
+          class="my-[10px]" />
         <AppLink :to="{
           name: 'space-proposal-overview',
           params: {
             proposal: proposal.proposal_id,
             space: `${proposal.network}:${proposal.space.id}`
           }
-        }" :class="$route.path === '/home' ? 'relative top-[20px] right-[8px] -mr-2' : ''">
-          <ProposalIconStatus size="16" :state="proposal.state" class="top-1.5" />
+        }" :class="$route.path === '/home' ? 'relative top-[30px] right-[13px] -mr-[12px]' : 'relative top-[3px]'">
+          <ProposalIconStatus size="18" :state="proposal.state" class="top-1.5" />
         </AppLink>
       </div>
-
-      <div class="min-w-0 my-1.5 items-center leading-6">
+      <div class="flex flex-col min-w-0 my-1.5 leading-6">
         <AppLink v-if="showSpace" :to="{
           name: 'space-overview',
           params: {
             space: `${proposal.network}:${proposal.space.id}`
           }
-        }" class="text-[21px] text-skin-text mr-2 font-bold inline shrink-0">
+        }" class="text-[20px] text-skin-text mr-2 font-bold inline shrink-0">
           {{ proposal.space.name }}
         </AppLink>
 
@@ -65,7 +64,7 @@ const space = computed(() =>
             space: `${proposal.network}:${proposal.space.id}`
           }
         }">
-          <h3 class="text-[21px] inline [overflow-wrap:anywhere] mr-2 min-w-0"
+          <h3 class="text-[20px] inline [overflow-wrap:anywhere] mr-2 min-w-0"
             v-text="proposal.title || `Proposal #${proposal.proposal_id}`" />
           <ProposalLabels v-if="space?.labels && proposal.labels.length" :labels="proposal.labels" :space="space"
             inline />
