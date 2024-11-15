@@ -197,7 +197,7 @@ watchEffect(() => setTitle('Create space'));
       <div class="flex-1">
         <div class="mt-8 lg:mt-0">
           <template v-if="currentPage === 'profile'">
-            <h3 class="mb-4">Space profile</h3>
+            <h3 class="mb-4">Create space</h3>
             <FormSpaceProfile :form="metadataForm" @errors="v => handleErrors('profile', v)" />
             <div class="s-box p-4 -mt-6">
               <FormSpaceTreasuries v-model="metadataForm.treasuries" :network-id="selectedNetworkId" />

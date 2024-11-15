@@ -41,6 +41,14 @@ watchEffect(() => setTitle('Explore'));
 </script>
 
 <template>
+  <div class="flex">
+    <div class="flex-auto" />
+    <div class="pt-4 px-4 space-x-2">
+      <UiButton class="!px-0 w-[46px]" @click="$router.push('/create')">
+        <IH-plus-sm class="inline-block" />
+      </UiButton>
+    </div>
+  </div>
   <UiLabel label="Explore" />
   <UiLoading v-if="spacesStore.loading" class="block m-4" />
   <div v-else-if="spacesStore.loaded">
