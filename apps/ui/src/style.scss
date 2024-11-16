@@ -1,6 +1,37 @@
 @tailwind base;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Calibre';
+  src: url('./assets/fonts/Calibre-Medium-Custom.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calibre';
+  src: url('./assets/fonts/Calibre-Semibold-Custom.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Stolzl Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./assets/fonts/StolzlDisplay-Medium.woff2') format('woff2');
+
+}
+
+@font-face {
+  font-family: 'Stolzl';
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+  src: url('./assets/fonts/Stolzl-Medium.woff2') format('woff2');
+}
+
 :root {
   color-scheme: light;
 
@@ -65,34 +96,6 @@
   --success-border: rgba(87, 179, 117, 0.4);
   --success-hover: rgba(87, 179, 117, 0.04);
   --success-active: rgba(87, 179, 117, 0.12);
-}
-
-@font-face {
-  font-family: 'Calibre';
-  src: url('./assets/fonts/Calibre-Medium-Custom.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Calibre';
-  src: url('./assets/fonts/Calibre-Semibold-Custom.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Stolzl Display';
-  font-style: normal;
-  font-weight: 700;
-  src: url('./assets/fonts/StolzlDisplay-Medium.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Stolzl';
-  font-style: normal;
-  font-weight: 700;
-  src: url('./assets/fonts/Stolzl-Medium.woff2') format('woff2');
 }
 
 body {
@@ -162,12 +165,15 @@ input {
   &._1 {
     @apply bg-skin-success;
   }
+
   &._2 {
     @apply bg-skin-danger;
   }
+
   &._3 {
     @apply bg-skin-text;
   }
+
   &._quorum {
     @apply bg-skin-border;
   }
@@ -177,12 +183,15 @@ input {
   &._1 {
     @apply text-skin-success;
   }
+
   &._2 {
     @apply text-skin-danger;
   }
+
   &._3 {
     @apply text-skin-text;
   }
+
   &._quorum {
     @apply text-skin-border;
   }
@@ -192,12 +201,15 @@ input {
   &._1 {
     @apply border-skin-success;
   }
+
   &._2 {
     @apply border-skin-danger;
   }
+
   &._3 {
     @apply border-skin-text;
   }
+
   &._quorum {
     @apply border-skin-text;
   }
@@ -276,8 +288,10 @@ input:placeholder-shown {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 // Shot UI kit
@@ -291,6 +305,7 @@ input:placeholder-shown {
 }
 
 .s-base {
+
   &:focus-within,
   &.s-error {
     .s-label-char-count {
@@ -308,6 +323,7 @@ input:placeholder-shown {
   }
 
   textarea.s-input {
+
     &,
     :focus {
       @apply outline outline-1 outline-offset-[-1px] outline-skin-danger border-transparent;
@@ -324,6 +340,7 @@ input:placeholder-shown {
 }
 
 .s-box {
+
   // Adding the gradient fade to the top of the input
   .s-label:has(+ textarea),
   .s-base:has(textarea:only-child) {
