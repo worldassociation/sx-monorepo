@@ -259,7 +259,7 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
           <!-- First proof -->
           <div class="mb-3 md:mb-0">
             <div v-if="loadingVoterId">
-              <UiLoading class="inline-block" />
+              <UiLoading class="inline-block pt-[9px] pb-[10px]" />
             </div>
             <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
               <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
@@ -272,7 +272,7 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
           <!-- Second proof -->
           <div>
             <div v-if="loadingAttestation">
-              <UiLoading class="inline-block" />
+              <UiLoading class="inline-block pt-[9px] pb-[10px]" />
             </div>
             <div v-else-if="hasAttestation">
               <a :href="`https://base.easscan.org/attestation/view/${attestationId}`" target="_blank"
