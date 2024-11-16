@@ -259,7 +259,10 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
           <!-- First proof -->
           <div class="mb-3 md:mb-0">
             <div v-if="loadingVoterId">
-              <UiLoading class="inline-block pt-[9px] pb-[10px]" />
+              <span class="flex items-center gap-2">
+                <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
+                <UiSkeleton class="h-[18px] w-[120px]" />
+              </span>
             </div>
             <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
               <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
@@ -272,7 +275,10 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
           <!-- Second proof -->
           <div>
             <div v-if="loadingAttestation">
-              <UiLoading class="inline-block pt-[9px] pb-[10px]" />
+              <span class="flex items-center gap-2">
+                <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
+                <UiSkeleton class="h-[18px] w-[147px]" />
+              </span>
             </div>
             <div v-else-if="hasAttestation">
               <a :href="`https://base.easscan.org/attestation/view/${attestationId}`" target="_blank"
@@ -308,7 +314,26 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
         <span class="w-[20%] lg:w-[25%] text-right truncate">Votes</span>
       </div>
     </div>
-    <UiLoading v-if="loadingActivities" class="px-4 py-3 block" />
+    <div v-if="loadingActivities" class="animate-pulse">
+      <div v-for="i in 2" :key="i" class="mx-4 border-b flex space-x-1 py-3">
+        <div class="flex items-center gap-x-3 leading-[22px] w-[60%] lg:w-[50%] font-semibold truncate">
+          <!-- Space Avatar Skeleton -->
+          <UiSkeleton class="size-[32px] !rounded-[4px]" />
+          <!-- Space Name Skeleton -->
+          <UiSkeleton class="h-[18px] w-[120px]" />
+        </div>
+        <!-- Proposals Column -->
+        <div class="flex flex-col justify-center text-right w-[20%] lg:w-[25%] leading-[22px] truncate">
+          <UiSkeleton class="h-[22px] w-[24px] ml-auto" />
+          <UiSkeleton class="h-[17px] w-[32px] ml-auto mt-[5px]" />
+        </div>
+        <!-- Votes Column -->
+        <div class="flex flex-col justify-center text-right w-[20%] lg:w-[25%] leading-[22px] truncate">
+          <UiSkeleton class="h-[22px] w-[24px] ml-auto" />
+          <UiSkeleton class="h-[17px] w-[32px] ml-auto mt-[5px]" />
+        </div>
+      </div>
+    </div>
     <div v-else-if="!activities.length" class="px-4 py-3 flex items-center space-x-2">
       <IH-exclamation-circle class="inline-block" />
       <span>This user does not have any activities yet.</span>

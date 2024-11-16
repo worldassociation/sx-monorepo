@@ -271,7 +271,10 @@ const closeResultDialog = () => {
 
 <template>
   <template v-if="isLoading">
-    <UiLoading class="inline-block pt-[9px] pb-[10px]" />
+    <span class="flex items-center gap-2">
+      <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
+      <UiSkeleton class="h-[18px] w-[140px]" />
+    </span>
   </template>
   <template v-else>
     <span class="cursor-pointer text-skin-link flex items-center gap-2">
