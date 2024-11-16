@@ -7,7 +7,7 @@ import IHUser from '~icons/heroicons-outline/user';
 const { web3 } = useWeb3();
 const route = useRoute();
 
-const { fullyVisible, isMobile } = useScrollVisibility({ threshold: 100 });
+const { isVisible, isMobile } = useScrollVisibility({ threshold: 100 });
 
 const menu = [
   {
@@ -41,7 +41,7 @@ const menu = [
 
 <template>
   <nav class="fixed bottom-0 inset-x-0 z-50 bg-skin-bg border-t text-xs transition-transform duration-200"
-    :class="{ 'translate-y-full': !fullyVisible && isMobile }">
+    :class="{ 'translate-y-full': !isVisible && isMobile }">
     <div class="flex px-4 justify-between">
       <AppLink v-for="(item, i) in menu" :key="i" :to="item.link"
         class="inline-flex flex-col text-center truncate justify-center max-w-[120px]"

@@ -1,19 +1,11 @@
 <script setup lang="ts">
-const { scrollProgress, isMobile } = useScrollVisibility();
-
-const translateY = computed(() => {
-  if (!isMobile.value) return 0;
-  return -72 * scrollProgress.value;
-});
+const { isVisible, isMobile } = useScrollVisibility();
 </script>
 
 <template>
   <header
-    class="fixed top-0 inset-x-0 z-50 border-b flex items-center justify-between h-[72px] bg-skin-bg will-change-transform"
-    :style="{
-      transform: `translate3d(0, ${translateY}px, 0)`,
-      transition: 'transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)'
-    }">
+    class="fixed top-0 inset-x-0 z-50 border-b flex items-center justify-between h-[72px] bg-skin-bg transition-transform duration-200"
+    :class="{ '-translate-y-full': !isVisible && isMobile }">
     <slot />
   </header>
 </template>
