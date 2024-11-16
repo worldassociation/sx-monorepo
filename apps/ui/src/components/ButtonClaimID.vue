@@ -221,7 +221,7 @@ watch(() => web3Account, initializeWidget, { immediate: true });
         <UiButton class="!px-0 w-[46px]">
           <IH-check class="inline-block" />
         </UiButton>
-        <span class="text-skin-text">Verified with <span class="text-skin-link">zkMe</span></span>
+        <span class="text-skin-text">Verified by <span class="text-skin-link">zkMe</span></span>
       </template>
       <template v-else>
         <UiButton class="!px-0 w-[46px]">

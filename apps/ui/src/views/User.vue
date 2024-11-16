@@ -35,6 +35,9 @@ const modalOpenEditUser = ref(false);
 const loaded = ref(false);
 const voterIdBalance = ref<string | null>(null);
 const loadingVoterId = ref(true);
+const hasAttestation = ref<boolean>(false);
+const loadingAttestation = ref(true);
+const attestationId = ref<string | null>(null);
 
 const id = computed(() => route.params.user as string);
 
@@ -114,6 +117,58 @@ async function fetchVoterIdBalance(userId: string) {
   }
 }
 
+async function checkUserAttestation(userId: string) {
+  try {
+    loadingAttestation.value = true;
+
+    const response = await fetch('https://base.easscan.org/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            attestations(
+              where: {
+                schemaId: { equals: "0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9" },
+                recipient: { equals: "${userId}" }
+              }
+            ) {
+              id
+              attester
+              recipient
+              revoked
+            }
+          }
+        `
+      })
+    });
+
+    const result = await response.json();
+    console.log('Attestation response:', result);
+
+    if (result.errors) {
+      console.error('GraphQL Errors:', result.errors);
+      return;
+    }
+
+    // Find first valid attestation and store its ID
+    const validAttestation = result.data?.attestations?.find(
+      attestation => !attestation.revoked
+    );
+
+    hasAttestation.value = !!validAttestation;
+    attestationId.value = validAttestation?.id || null;
+
+  } catch (error) {
+    console.error('Error checking attestation:', error);
+    hasAttestation.value = false;
+  } finally {
+    loadingAttestation.value = false;
+  }
+}
+
 watch(
   id,
   async userId => {
@@ -137,6 +192,7 @@ watch(
   userId => {
     if (isValidAddress(userId)) {
       fetchVoterIdBalance(userId);
+      checkUserAttestation(userId);
     }
   },
   { immediate: true }
@@ -198,15 +254,45 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
         </div>
       </div>
       <div v-if="compareAddresses(web3.account, user.id)" class="mb-3">
-        <h4 class="mb-2 eyebrow leading-8">Proof of Personhood</h4>
-        <div v-if="loadingVoterId">
-          <UiLoading class="inline-block" />
-        </div>
-        <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
-          <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
-        </div>
-        <div v-else class="flex items-center space-x-2">
-          <ButtonClaimID :user="true" :done="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+        <h4 class="mb-2 eyebrow leading-8">Proofs of Personhood</h4>
+        <div class="flex flex-col md:flex-row md:gap-x-6">
+          <!-- First proof -->
+          <div class="mb-3 md:mb-0">
+            <div v-if="loadingVoterId">
+              <UiLoading class="inline-block" />
+            </div>
+            <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
+              <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+            </div>
+            <div v-else class="flex items-center space-x-2">
+              <ButtonClaimID :user="true" :done="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+            </div>
+          </div>
+
+          <!-- Second proof -->
+          <div>
+            <div v-if="loadingAttestation">
+              <UiLoading class="inline-block" />
+            </div>
+            <div v-else-if="hasAttestation">
+              <a :href="`https://base.easscan.org/attestation/view/${attestationId}`" target="_blank"
+                class="flex items-center cursor-pointer gap-x-2">
+                <UiButton class="!px-0 w-[46px]">
+                  <IH-check class="inline-block" />
+                </UiButton>
+                <span class="text-skin-text">Verified by <span class="text-skin-link">Coinbase</span></span>
+              </a>
+            </div>
+            <div v-else>
+              <a href="https://www.coinbase.com/onchain-verify" target="_blank"
+                class="flex items-center cursor-pointer gap-x-2">
+                <UiButton class="!px-0 w-[46px]">
+                  <IH-plus class="inline-block" />
+                </UiButton>
+                <span class="text-skin-text">Get <span class="text-skin-link">Coinbase</span> verification</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <div v-if="compareAddresses(web3.account, user.id)" class="mb-3">
