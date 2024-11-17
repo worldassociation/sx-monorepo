@@ -231,7 +231,7 @@ watch(() => web3Account, initializeWidget, { immediate: true });
       </template>
     </template>
     <template v-else>
-      <span class="text-skin-text">Create your</span> Global Voter ID
+      <span><span class="text-skin-text">Create your</span> Global Voter ID</span>
     </template>
   </span>
 
