@@ -72,7 +72,7 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          An open platform for global governance
+          A free and open-source platform for global democracy
         </h1>
       </div>
     </UiContainer>
