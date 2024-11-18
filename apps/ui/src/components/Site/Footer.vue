@@ -26,7 +26,7 @@ const SOCIALS = [
     <UiContainer class="!max-w-screen-lg space-y-7">
       <div class="grid grid-col-2 md:grid-cols-4 space-y-4 md:space-y-0">
         <div class="space-y-2">
-          <div class="eyebrow">World Association</div>
+          <div class="eyebrow">Platform</div>
           <div class="space-y-1">
             <div>
               <AppLink :to="{ name: 'my-explore' }"> Explore spaces </AppLink>
@@ -71,7 +71,7 @@ const SOCIALS = [
               </a>
             </div>
             <div>
-              <a href="https://github.com/snapshot-labs" target="_blank">
+              <a href="https://github.com/worldassociation" target="_blank">
                 GitHub
                 <IH-arrow-sm-right class="inline-block -rotate-45 mb-0.5 -ml-0.5" />
               </a>
@@ -85,7 +85,13 @@ const SOCIALS = [
           </div>
         </div>
         <div class="space-y-2">
-          <div class="eyebrow">Company</div>
+          <div class="eyebrow">Organization</div>
+          <div>
+            <a href="https://github.com/worldassociation/constitution" target="_blank">
+              Constitution
+              <IH-arrow-sm-right class="inline-block -ml-0.5 mb-0.5 -rotate-45" />
+            </a>
+          </div>
           <div>
             <AppLink :to="{ name: 'site-terms' }">Terms of use</AppLink>
           </div>
