@@ -13,7 +13,7 @@ const auth = getInstance();
 const uiStore = useUiStore();
 const { modalAccountOpen, modalAccountWithoutDismissOpen, resetAccountModal } =
   useModal();
-const { web3 } = useWeb3();
+const { web3, authInitiated } = useWeb3();
 const { toggleSkin, currentMode } = useUserSkin();
 
 const SEARCH_CONFIG = {
@@ -80,13 +80,12 @@ watch(
 );
 
 watch(
-  [() => web3.value.account, () => web3.value.authLoading],
-  ([account, authLoading], [prevAccount]) => {
-    if (!prevAccount && !account && !authLoading) {
+  [() => web3.value.account, () => web3.value.authLoading, () => authInitiated.value],
+  ([account, authLoading, initiated]) => {
+    if (initiated && !account && !authLoading && !modalAccountWithoutDismissOpen.value) {
       modalAccountOpen.value = true;
     }
-  },
-  { immediate: true }
+  }
 );
 
 onUnmounted(() => {
