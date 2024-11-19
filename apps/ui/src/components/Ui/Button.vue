@@ -28,7 +28,7 @@ withDefaults(
     primary: primary,
     'w-[46px] px-0': loading,
     'px-3.5': !loading || ($attrs.class as 'string')?.includes('w-full')
-  }" class="button">
+  }" class="button leading-[100%] ">
     <UiLoading v-if="loading" :inverse="primary" />
     <slot v-else />
   </button>
