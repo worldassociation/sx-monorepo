@@ -11,10 +11,10 @@ import ISUserGroup from '~icons/heroicons-solid/user-group';
 
 const FEATURES = [
   {
-    title: 'Open-source software',
+    title: 'Democratic legitimacy',
     about:
-      'Launch your campaigns on a transparent application that is free to use and free to improve.',
-    icon: ICGitHub
+      'Use our Global Voter ID system to ensure that only real and unique people participate in your initiatives.',
+    icon: ISUserGroup
   },
   {
     title: 'Costless polls and petitions',
@@ -23,16 +23,16 @@ const FEATURES = [
     icon: ISCursorClick
   },
   {
-    title: 'Democratic legitimacy',
-    about:
-      'Use our Global Voter ID system to ensure that only real and unique people participate in your initiatives.',
-    icon: ISUserGroup
-  },
-  {
     title: 'Community grants',
     about:
       "Receive funding to drive positive change and address humanity's most pressing global challenges.",
     icon: ISBanknotes
+  },
+  {
+    title: 'Open-source software',
+    about:
+      'Launch your campaigns on a transparent application that is free to use and free to improve.',
+    icon: ICGitHub
   },
   {
     title: 'Multiple voting systems',
@@ -72,7 +72,7 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Free and open-source global governance
+          Everything you need to have a global impact
         </h1>
       </div>
     </UiContainer>
