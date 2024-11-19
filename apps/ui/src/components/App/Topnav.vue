@@ -109,7 +109,7 @@ onUnmounted(() => {
       <label class="flex items-center w-full space-x-2.5">
         <IH-search class="shrink-0" />
         <input ref="searchInput" v-model.trim="searchValue" type="text" :placeholder="searchConfig.placeholder"
-          class="bg-transparent text-skin-link text-[19px] md:mt-1 w-full" />
+          class="bg-transparent text-skin-link text-[18px] md:mt-1 w-full" />
       </label>
     </form>
 
