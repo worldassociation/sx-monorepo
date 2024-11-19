@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IHBell from '~icons/heroicons-outline/bell';
-import IHGlobe from '~icons/heroicons-outline/globe-americas';
+import IHSearch from '~icons/heroicons-outline/search';
 import IHHome from '~icons/heroicons-outline/home';
 import IHUser from '~icons/heroicons-outline/user';
 
@@ -16,7 +16,7 @@ const menu = [
   },
   {
     link: { name: 'my-explore' },
-    icon: IHGlobe
+    icon: IHSearch
   },
   {
     link: { path: '/s:worldassociation.eth' },

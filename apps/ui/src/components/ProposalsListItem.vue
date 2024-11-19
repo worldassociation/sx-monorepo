@@ -25,7 +25,7 @@ const handleVoteClick = (choice: Choice) => {
 </script>
 <template>
   <div>
-    <div class="border-b mx-4 py-[14px] flex">
+    <div class="border-b mx-3 sm:mx-4 py-[14px] flex">
       <ProposalsListItemHeading :proposal="proposal" :show-author="showAuthor" :show-space="showSpace"
         class="flex-auto mr-1 w-0" />
       <div class="hidden md:block">

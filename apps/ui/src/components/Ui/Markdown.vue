@@ -131,7 +131,7 @@ html.dark {
 }
 
 .markdown-body:deep() {
-  font-size: 20px;
+  font-size: 19px;
   word-wrap: break-word;
   color: var(--content);
 

@@ -27,7 +27,8 @@ const style = computed(() => ({
 
 <template>
   <UiTooltip :title="titles[state]">
-    <IS-clock v-if="state === 'pending'" class="text-gray-400" :style="style" />
+    <IS-clock v-if="state === 'pending'" class="text-gray-400 bg-skin-bg rounded-full border-[1px] border-skin-bg"
+      :style="style" />
     <IS-status-online v-else-if="state === 'active'"
       class="text-skin-success bg-skin-bg rounded-full border-2 border-skin-bg" :style="style" />
     <IS-check-circle v-else-if="state === 'passed'"

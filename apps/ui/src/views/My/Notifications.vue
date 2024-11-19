@@ -35,30 +35,40 @@ onUnmounted(() => notificationsStore.markAllAsRead());
     <UiLoading v-if="notificationsStore.loading" class="block px-4 py-3" />
     <div v-else-if="notificationsStore.notifications.length">
       <div v-for="(notification, i) in notificationsStore.notifications" :key="i">
-        <div class="border-b px-4 py-[14px] flex space-x-3" :class="{ 'bg-skin-border/20': notification.unread }">
-          <div>
-            <SpaceAvatar
-              :space="{ id: notification.proposal.space.id, avatar: notification.proposal.space.avatar, network: notification.proposal.network }"
-              :size="32" class="mr-2 mb-1" />
-            <AppLink :to="{
-              name: 'space-overview',
-              params: {
-                space: `${notification.proposal.network}:${notification.proposal.space.id}`
-              }
-            }">
-              {{ notification.proposal.space.name }}
-            </AppLink>
-            proposal has {{ notification.type }}
-            {{ _rt(notification.timestamp) }}
-            <AppLink :to="{
-              name: 'space-proposal-overview', params: {
-                proposal: notification.proposal.proposal_id,
-                space: `${notification.proposal.network}:${notification.proposal.space.id}`
-              }
-            }">
-              <h3 class="font-normal text-[20px] [overflow-wrap:anywhere]"
-                v-text="notification.proposal.title || `#${notification.proposal.proposal_id}`" />
-            </AppLink>
+        <div class="border-b px-3 sm:px-4 py-[14px] flex space-x-3"
+          :class="{ 'bg-skin-border/20': notification.unread }">
+          <div class="flex flex-col">
+            <div class="flex items-start">
+              <SpaceAvatar
+                :space="{ id: notification.proposal.space.id, avatar: notification.proposal.space.avatar, network: notification.proposal.network }"
+                :size="32" class="mr-2" />
+              <div class="flex flex-col">
+                <div class="text-left flex items-center gap-1">
+                  <AppLink :to="{
+                    name: 'space-overview',
+                    params: {
+                      space: `${notification.proposal.network}:${notification.proposal.space.id}`
+                    }
+                  }">
+                    {{ notification.proposal.space.name }}
+                  </AppLink>
+                  <span class="text-skin-text">
+                    proposal has {{ notification.type }}
+                    {{ _rt(notification.timestamp) }}
+                  </span>
+                </div>
+                <AppLink :to="{
+                  name: 'space-proposal-overview',
+                  params: {
+                    proposal: notification.proposal.proposal_id,
+                    space: `${notification.proposal.network}:${notification.proposal.space.id}`
+                  }
+                }" class="mt-0.5">
+                  <h3 class="font-normal text-[19px] [overflow-wrap:anywhere] text-left"
+                    v-text="notification.proposal.title || `#${notification.proposal.proposal_id}`" />
+                </AppLink>
+              </div>
+            </div>
           </div>
         </div>
       </div>

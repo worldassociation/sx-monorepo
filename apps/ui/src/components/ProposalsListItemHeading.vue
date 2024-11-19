@@ -47,7 +47,7 @@ const space = computed(() =>
           <ProposalIconStatus size="18" :state="proposal.state" class="top-1" />
         </AppLink>
       </div>
-      <div class="flex flex-col min-w-0 mt-1 mb-1.5 leading-6">
+      <div class="flex flex-col min-w-0 mt-1 leading-6">
         <AppLink v-if="showSpace" :to="{
           name: 'space-overview',
           params: {
@@ -64,7 +64,7 @@ const space = computed(() =>
             space: `${proposal.network}:${proposal.space.id}`
           }
         }">
-          <h3 class="text-md inline [overflow-wrap:anywhere] mr-2 min-w-0"
+          <h3 class="text-[19px] inline [overflow-wrap:anywhere] mr-2 min-w-0"
             v-text="proposal.title || `Proposal #${proposal.proposal_id}`" />
           <ProposalLabels v-if="space?.labels && proposal.labels.length" :labels="proposal.labels" :space="space"
             inline />
@@ -72,35 +72,38 @@ const space = computed(() =>
             showVotedIndicator && votes[`${proposal.network}:${proposal.id}`]
           " class="text-skin-success inline-block shrink-0 relative" />
         </AppLink>
+
+        <div class="text-sm flex flex-wrap items-center gap-1">
+          <template v-if="showAuthor">
+            <span>By</span>
+            <AppLink class="text-skin-text" :to="{
+              name: 'space-user-statement',
+              params: {
+                space: `${proposal.network}:${proposal.space.id}`,
+                user: proposal.author.id
+              }
+            }">
+              {{ proposal.author.name || shortenAddress(proposal.author.id) }}
+            </AppLink>
+          </template>
+          <template v-if="proposal.vote_count">
+            <span>·</span>
+            <span>{{ _n(proposal.vote_count, 'compact') }}
+              <span v-if="proposal.vote_count !== 1">{{ proposal.vote_count !== 1 ? 'votes' : 'vote' }}</span>
+            </span>
+          </template>
+          <template v-if="proposal.quorum">
+            <span>·</span>
+            <span class="lowercase">
+              {{ _p(totalProgress) }} {{ quorumLabel(proposal.quorum_type) }}
+            </span>
+          </template>
+          <span>·</span>
+          <button type="button" class="text-skin-text" @click="modalOpenTimeline = true"
+            v-text="_rt(getTsFromCurrent(proposal.network, proposal.max_end))" />
+        </div>
       </div>
     </div>
-    <div class="inline">
-      {{ getProposalId(proposal) }}
-      <template v-if="showAuthor">
-        by
-        <AppLink class="text-skin-text" :to="{
-          name: 'space-user-statement',
-          params: {
-            space: `${proposal.network}:${proposal.space.id}`,
-            user: proposal.author.id
-          }
-        }">
-          {{ proposal.author.name || shortenAddress(proposal.author.id) }}
-        </AppLink>
-      </template>
-    </div>
-    <span>
-      <template v-if="proposal.vote_count">
-        · {{ _n(proposal.vote_count, 'compact') }}
-        {{ proposal.vote_count !== 1 ? 'votes' : 'vote' }}
-      </template>
-      <span v-if="proposal.quorum" class="lowercase">
-        · {{ _p(totalProgress) }} {{ quorumLabel(proposal.quorum_type) }}
-      </span>
-      ·
-      <button type="button" class="text-skin-text" @click="modalOpenTimeline = true"
-        v-text="_rt(getTsFromCurrent(proposal.network, proposal.max_end))" />
-    </span>
   </div>
   <teleport to="#modal">
     <ModalTimeline :open="modalOpenTimeline" :proposal="proposal" @close="modalOpenTimeline = false" />

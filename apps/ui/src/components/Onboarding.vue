@@ -102,11 +102,11 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
     <div class="mx-4">
       <div class="border-b py-[14px] flex gap-x-2.5">
         <div><IS-flag class="text-skin-text/10 mt-0.5" /></div>
-        <UiSkeleton class="my-1 h-[19px] w-[120px]" />
+        <UiSkeleton class="my-1 h-[18px] w-[120px]" />
       </div>
       <div class="border-b py-[14px] flex gap-x-2.5">
         <div><IS-flag class="text-skin-text/10 mt-0.5" /></div>
-        <UiSkeleton class="my-1 h-[19px] w-[120px]" />
+        <UiSkeleton class="my-1 h-[17px] w-[120px]" />
       </div>
     </div>
   </div>
