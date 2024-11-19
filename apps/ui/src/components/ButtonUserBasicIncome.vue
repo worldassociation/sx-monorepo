@@ -273,7 +273,7 @@ const closeResultDialog = () => {
   <template v-if="isLoading">
     <span class="flex items-center gap-2">
       <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
-      <UiSkeleton class="h-[18px] w-[140px]" />
+      <UiSkeleton class="h-[18px] w-[133px]" />
     </span>
   </template>
   <template v-else>

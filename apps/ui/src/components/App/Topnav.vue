@@ -79,6 +79,16 @@ watch(
   { immediate: true }
 );
 
+watch(
+  [() => web3.value.account, () => web3.value.authLoading],
+  ([account, authLoading], [prevAccount]) => {
+    if (!prevAccount && !account && !authLoading) {
+      modalAccountOpen.value = true;
+    }
+  },
+  { immediate: true }
+);
+
 onUnmounted(() => {
   resetAccountModal();
 });

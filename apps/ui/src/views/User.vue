@@ -261,7 +261,7 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
             <div v-if="loadingVoterId">
               <span class="flex items-center gap-2">
                 <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
-                <UiSkeleton class="h-[18px] w-[120px]" />
+                <UiSkeleton class="h-[18px] w-[113px]" />
               </span>
             </div>
             <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
@@ -277,7 +277,7 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
             <div v-if="loadingAttestation">
               <span class="flex items-center gap-2">
                 <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
-                <UiSkeleton class="h-[18px] w-[147px]" />
+                <UiSkeleton class="h-[18px] w-[139px]" />
               </span>
             </div>
             <div v-else-if="hasAttestation">
