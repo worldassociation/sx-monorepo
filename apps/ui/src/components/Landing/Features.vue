@@ -78,7 +78,7 @@ const FEATURES = [
     </UiContainer>
     <div class="border-t">
       <UiContainer class="!max-w-screen-lg !px-0">
-        <div class="grid grid-cols-1 lg:grid-cols-3">
+        <div class="grid grid-cols-1 text-[18px] lg:grid-cols-3">
           <div v-for="(feature, i) in FEATURES" :key="i"
             class="px-4 py-5 border-b last:border-b-0 border-r-0 lg:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-child(n+7)]:border-b-0">
             <component :is="feature.icon" class="text-skin-link size-[22px] mb-4" />

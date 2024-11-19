@@ -43,7 +43,7 @@ const STEPS = [
     </UiContainer>
     <div class="border-y">
       <UiContainer class="!max-w-screen-lg !px-0">
-        <div class="grid grid-cols-1 lg:grid-cols-2 text-md flow">
+        <div class="grid grid-cols-1 lg:grid-cols-2 text-[19px] flow">
           <div v-for="(step, i) in STEPS" :key="i"
             class="border-b border-r-0 last:border-b-0 lg:border-r lg:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(n+3)]:border-b-0">
             <div class="px-4 py-5">

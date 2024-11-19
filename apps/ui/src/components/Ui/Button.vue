@@ -36,7 +36,7 @@ withDefaults(
 
 <style lang="scss" scoped>
 .button {
-  @apply rounded-full leading-[100%] border h-[46px] text-skin-link bg-skin-bg;
+  @apply rounded-full border h-[46px] text-skin-link bg-skin-bg;
 
   &:disabled:deep() {
     color: rgba(var(--border)) !important;
