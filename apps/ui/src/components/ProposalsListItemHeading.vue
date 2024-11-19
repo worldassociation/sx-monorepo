@@ -36,24 +36,25 @@ const space = computed(() =>
       <div class="flex flex-shrink-0">
         <SpaceAvatar v-if="$route.path === '/home'"
           :space="{ id: proposal.space.id, avatar: proposal.space.avatar, network: proposal.network }" :size="40"
-          class="my-2" />
+          class="my-1" />
         <AppLink :to="{
           name: 'space-proposal-overview',
           params: {
             proposal: proposal.proposal_id,
             space: `${proposal.network}:${proposal.space.id}`
           }
-        }" :class="$route.path === '/home' ? 'relative top-[30px] right-[13px] -mr-[12px]' : 'relative top-[3px]'">
+        }"
+          :class="$route.path === '/home' ? 'relative top-[26px] right-[13px] -mr-[16px] md:-mr-[12px]' : 'relative -top-[1px]'">
           <ProposalIconStatus size="18" :state="proposal.state" class="top-1" />
         </AppLink>
       </div>
-      <div class="flex flex-col min-w-0 mt-1 leading-6">
+      <div class="flex flex-col min-w-0 leading-6">
         <AppLink v-if="showSpace" :to="{
           name: 'space-overview',
           params: {
             space: `${proposal.network}:${proposal.space.id}`
           }
-        }" class="text-md text-skin-text mr-2 font-bold inline shrink-0">
+        }" class="text-md text-skin-text font-bold inline shrink-0">
           {{ proposal.space.name }}
         </AppLink>
 
@@ -64,7 +65,7 @@ const space = computed(() =>
             space: `${proposal.network}:${proposal.space.id}`
           }
         }">
-          <h3 class="text-[19px] inline [overflow-wrap:anywhere] mr-2 min-w-0"
+          <h3 class="text-[19px] inline [overflow-wrap:anywhere] min-w-0"
             v-text="proposal.title || `Proposal #${proposal.proposal_id}`" />
           <ProposalLabels v-if="space?.labels && proposal.labels.length" :labels="proposal.labels" :space="space"
             inline />
@@ -73,7 +74,7 @@ const space = computed(() =>
           " class="text-skin-success inline-block shrink-0 relative" />
         </AppLink>
 
-        <div class="text-sm flex flex-wrap items-center gap-1">
+        <div class="text-sm flex flex-wrap items-center leading-5 gap-1 mt-0.5">
           <template v-if="showAuthor">
             <span>By</span>
             <AppLink class="text-skin-text" :to="{
