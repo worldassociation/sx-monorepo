@@ -53,7 +53,7 @@ onUnmounted(() => notificationsStore.markAllAsRead());
                     {{ notification.proposal.space.name }}
                   </AppLink>
                   <span class="text-skin-text">
-                    proposal has {{ notification.type }}
+                    voting {{ notification.type }}
                     {{ _rt(notification.timestamp) }}
                   </span>
                 </div>
