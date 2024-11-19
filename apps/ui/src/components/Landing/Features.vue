@@ -72,7 +72,7 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Everything you need to have a global impact
+          Everything you need to make a global impact
         </h1>
       </div>
     </UiContainer>
