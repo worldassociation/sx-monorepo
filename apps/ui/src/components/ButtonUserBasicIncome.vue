@@ -271,15 +271,15 @@ const closeResultDialog = () => {
 
 <template>
   <template v-if="isLoading">
-    <span class="flex items-center gap-2">
+    <span class="flex items-center gap-2.5">
       <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
       <UiSkeleton class="h-[18px] w-[133px]" />
     </span>
   </template>
   <template v-else>
-    <span class="cursor-pointer text-skin-link flex items-center gap-2">
+    <span class="cursor-pointer text-skin-link flex items-center gap-2.5">
       <template v-if="isBasicIncomeSetUp">
-        <div class="flex items-center gap-2 cursor-pointer" @click="showStreamModal = true">
+        <div class="flex items-center gap-2.5 cursor-pointer" @click="showStreamModal = true">
           <UiButton class="!px-0 w-[46px]">
             <IH-banknotes class="inline-block" />
           </UiButton>
@@ -287,7 +287,7 @@ const closeResultDialog = () => {
         </div>
       </template>
       <template v-else>
-        <div class="flex items-center gap-2 cursor-pointer" @click="handleLaunchWidget">
+        <div class="flex items-center gap-2.5 cursor-pointer" @click="handleLaunchWidget">
           <UiButton class="!px-0 w-[46px]">
             <IH-plus class="inline-block" />
           </UiButton>

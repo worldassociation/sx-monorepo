@@ -38,6 +38,8 @@ const loadingVoterId = ref(true);
 const hasAttestation = ref<boolean>(false);
 const loadingAttestation = ref(true);
 const attestationId = ref<string | null>(null);
+const loadingBabt = ref(true);
+const babtBalance = ref<string | null>(null);
 
 const id = computed(() => route.params.user as string);
 
@@ -169,6 +171,24 @@ async function checkUserAttestation(userId: string) {
   }
 }
 
+async function fetchBabtBalance(userId: string) {
+  try {
+    const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed.bnbchain.org');
+    const abi = [
+      "function balanceOf(address owner) view returns (uint256)"
+    ];
+    const contract = new ethers.Contract('0x2B09d47D550061f995A3b5C6F0Fd58005215D7c8', abi, provider);
+
+    const balance = await contract.balanceOf(userId);
+    babtBalance.value = ethers.utils.formatUnits(balance, 0);
+  } catch (error) {
+    console.error('Error fetching BABT balance:', error);
+    babtBalance.value = '0';
+  } finally {
+    loadingBabt.value = false;
+  }
+}
+
 watch(
   id,
   async userId => {
@@ -193,6 +213,7 @@ watch(
     if (isValidAddress(userId)) {
       fetchVoterIdBalance(userId);
       checkUserAttestation(userId);
+      fetchBabtBalance(userId);
     }
   },
   { immediate: true }
@@ -255,48 +276,94 @@ watchEffect(() => setTitle(`${user.value?.name || id.value} user profile`));
       </div>
       <div v-if="compareAddresses(web3.account, user.id)" class="mb-3">
         <h4 class="mb-2 eyebrow leading-8">Proofs of Personhood</h4>
-        <div class="flex flex-col md:flex-row md:gap-x-6">
+        <div class="flex flex-col gap-3 2xl:flex-row 2xl:gap-8">
           <!-- First proof -->
-          <div class="mb-3 md:mb-0">
+          <div>
             <div v-if="loadingVoterId">
-              <span class="flex items-center gap-2">
-                <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
-                <UiSkeleton class="h-[18px] w-[113px]" />
+              <span class="flex items-center justify-between w-full">
+                <span class="text-skin-link">Global Voter ID</span>
+                <div class="2xl:ml-3">
+                  <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
+                </div>
               </span>
             </div>
-            <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0">
-              <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+            <div v-else-if="!voterIdBalance || parseFloat(voterIdBalance) === 0"
+              class="flex items-center justify-between w-full">
+              <span class="text-skin-link">Global Voter ID</span>
+              <div class="2xl:ml-3">
+                <ButtonClaimID :user="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+              </div>
             </div>
-            <div v-else class="flex items-center space-x-2">
-              <ButtonClaimID :user="true" :done="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+            <div v-else class="flex items-center justify-between w-full">
+              <span class="text-skin-link">Global Voter ID</span>
+              <div class="2xl:ml-3">
+                <ButtonClaimID :user="true" :done="true" @voter-id-claimed="balance => voterIdBalance = balance" />
+              </div>
             </div>
           </div>
 
           <!-- Second proof -->
           <div>
-            <div v-if="loadingAttestation">
-              <span class="flex items-center gap-2">
-                <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
-                <UiSkeleton class="h-[18px] w-[139px]" />
+            <div v-if="loadingBabt">
+              <span class="flex items-center justify-between w-full">
+                <span class="text-skin-link">Binance Account Bound Token</span>
+                <div class="2xl:ml-3">
+                  <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
+                </div>
               </span>
             </div>
-            <div v-else-if="hasAttestation">
-              <a :href="`https://base.easscan.org/attestation/view/${attestationId}`" target="_blank"
-                class="flex items-center cursor-pointer gap-x-2">
-                <UiButton class="!px-0 w-[46px]">
-                  <IH-check class="inline-block" />
-                </UiButton>
-                <span class="text-skin-text">Verified by <span class="text-skin-link">Coinbase</span></span>
-              </a>
+            <div v-else-if="babtBalance && parseFloat(babtBalance) > 0"
+              class="flex items-center justify-between w-full">
+              <span class="text-skin-link">Binance Account Bound Token</span>
+              <div class="2xl:ml-3">
+                <a href="https://www.binance.com/en/BABT" target="_blank">
+                  <UiButton class="!px-0 w-[46px]">
+                    <IH-check class="inline-block" />
+                  </UiButton>
+                </a>
+              </div>
             </div>
-            <div v-else>
-              <a href="https://www.coinbase.com/onchain-verify" target="_blank"
-                class="flex items-center cursor-pointer gap-x-2">
-                <UiButton class="!px-0 w-[46px]">
-                  <IH-plus class="inline-block" />
-                </UiButton>
-                <span class="text-skin-text">Get <span class="text-skin-link">Coinbase</span> verification</span>
-              </a>
+            <div v-else class="flex items-center justify-between w-full">
+              <span class="text-skin-link">Binance Account Bound Token</span>
+              <div class="2xl:ml-3">
+                <a href="https://www.binance.com/en/BABT" target="_blank">
+                  <UiButton class="!px-0 w-[46px]">
+                    <IH-plus class="inline-block" />
+                  </UiButton>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Third proof -->
+          <div>
+            <div v-if="loadingAttestation">
+              <span class="flex items-center justify-between w-full">
+                <span class="text-skin-link">Coinbase Verification</span>
+                <div class="2xl:ml-3">
+                  <UiSkeleton class="h-[46px] w-[46px] !rounded-full" />
+                </div>
+              </span>
+            </div>
+            <div v-else-if="hasAttestation" class="flex items-center justify-between w-full">
+              <span class="text-skin-link">Coinbase Verification</span>
+              <div class="2xl:ml-3">
+                <a :href="`https://base.easscan.org/attestation/view/${attestationId}`" target="_blank">
+                  <UiButton class="!px-0 w-[46px]">
+                    <IH-check class="inline-block" />
+                  </UiButton>
+                </a>
+              </div>
+            </div>
+            <div v-else class="flex items-center justify-between w-full">
+              <span class="text-skin-link">Coinbase Verification</span>
+              <div class="2xl:ml-3">
+                <a href="https://www.coinbase.com/onchain-verify" target="_blank">
+                  <UiButton class="!px-0 w-[46px]">
+                    <IH-plus class="inline-block" />
+                  </UiButton>
+                </a>
+              </div>
             </div>
           </div>
         </div>

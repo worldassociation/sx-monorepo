@@ -215,19 +215,17 @@ watch(() => web3Account, initializeWidget, { immediate: true });
 </script>
 
 <template>
-  <span class="cursor-pointer text-skin-link flex items-center gap-2" @click="launchWidget">
+  <span class="cursor-pointer text-skin-link flex items-center gap-2.5" @click="launchWidget">
     <template v-if="props.user">
       <template v-if="props.done">
         <UiButton class="!px-0 w-[46px]">
           <IH-check class="inline-block" />
         </UiButton>
-        <span class="text-skin-text">Verified by <span class="text-skin-link">zkMe</span></span>
       </template>
       <template v-else>
         <UiButton class="!px-0 w-[46px]">
           <IH-plus class="inline-block" />
         </UiButton>
-        <span class="text-skin-text">Get <span class="text-skin-link">zkMe</span> verification</span>
       </template>
     </template>
     <template v-else>
