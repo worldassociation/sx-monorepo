@@ -107,7 +107,7 @@ onUnmounted(() => {
     </div>
     <form v-if="searchConfig" id="search-form" class="flex flex-1 py-3 h-full" @submit="handleSearchSubmit">
       <label class="flex items-center w-full space-x-2.5">
-        <IH-search class="shrink-0" />
+        <IH-search class="shrink-0 opacity-60" />
         <input ref="searchInput" v-model.trim="searchValue" type="text" :placeholder="searchConfig.placeholder"
           class="bg-transparent text-skin-link text-[18px] md:mt-1 w-full" />
       </label>
