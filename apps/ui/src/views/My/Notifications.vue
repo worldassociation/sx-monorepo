@@ -35,15 +35,15 @@ onUnmounted(() => notificationsStore.markAllAsRead());
     <UiLoading v-if="notificationsStore.loading" class="block px-4 py-3" />
     <div v-else-if="notificationsStore.notifications.length">
       <div v-for="(notification, i) in notificationsStore.notifications" :key="i">
-        <div class="border-b px-3 sm:px-4 py-[14px] flex space-x-3"
+        <div class="border-b px-3 sm:px-4 py-2.5 sm:py-[14px] flex space-x-3"
           :class="{ 'bg-skin-border/20': notification.unread }">
           <div class="flex flex-col">
             <div class="flex items-start">
               <SpaceAvatar
                 :space="{ id: notification.proposal.space.id, avatar: notification.proposal.space.avatar, network: notification.proposal.network }"
-                :size="32" class="mr-2" />
+                :size="32" class="mr-2 relative top-1.5" />
               <div class="flex flex-col">
-                <div class="text-left flex items-center gap-1">
+                <div class="flex items-center gap-1">
                   <AppLink :to="{
                     name: 'space-overview',
                     params: {
@@ -64,7 +64,7 @@ onUnmounted(() => notificationsStore.markAllAsRead());
                     space: `${notification.proposal.network}:${notification.proposal.space.id}`
                   }
                 }" class="mt-0.5">
-                  <h3 class="font-normal text-[19px] [overflow-wrap:anywhere] text-left"
+                  <h3 class="font-normal text-[19px] mt-0.5 [overflow-wrap:anywhere] leading-[26px]"
                     v-text="notification.proposal.title || `#${notification.proposal.proposal_id}`" />
                 </AppLink>
               </div>
