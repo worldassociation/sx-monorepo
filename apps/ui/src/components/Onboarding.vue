@@ -68,7 +68,8 @@ watch(() => web3.value.account, fetchBasicIncomeStatus, { immediate: true });
 const tasks = computed(() => ({
   voterId: !voterIdBalance.value || parseFloat(voterIdBalance.value) === 0,
   basicIncome: !basicIncomeSetUp.value,
-  following: !followedSpacesStore.isFollowed('s:worldassociation.eth'),
+  followingWorldAssociation: !followedSpacesStore.isFollowed('s:worldassociation.eth'),
+  followingGlobalDemocracy: !followedSpacesStore.isFollowed('s:globaldemocracy.eth'),
   votes: !user.value?.votesCount
 }));
 
@@ -126,11 +127,20 @@ const isVoterIdBalanceLoaded = computed(() => voterIdBalance.value !== null);
       </div>
     </div>
 
-    <div v-if="tasks.following" class="border-b mx-4 py-[14px] flex gap-x-2.5">
+    <div v-if="tasks.followingWorldAssociation" class="border-b mx-4 py-[14px] flex gap-x-2.5">
       <div><IS-flag class="text-skin-link mt-0.5" /></div>
       <div class="grow">
         <AppLink :to="'/s:worldassociation.eth'">
           <span class="text-skin-text">Follow the</span> World Association
+        </AppLink>
+      </div>
+    </div>
+
+    <div v-if="tasks.followingGlobalDemocracy" class="border-b mx-4 py-[14px] flex gap-x-2.5">
+      <div><IS-flag class="text-skin-link mt-0.5" /></div>
+      <div class="grow">
+        <AppLink :to="'/s:globaldemocracy.eth'">
+          <span class="text-skin-text">Follow the</span> Global Democracy <span class="text-skin-text">space</span>
         </AppLink>
       </div>
     </div>
