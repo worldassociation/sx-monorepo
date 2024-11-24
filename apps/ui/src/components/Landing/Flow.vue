@@ -8,26 +8,14 @@ const STEPS = [
   {
     title: 'Join',
     about:
-      'Prove your personhood, set up your basic income, and join conversations on global issues – all while preserving your privacy by default.',
+      'Prove your personhood, set up your basic income, and join conversations on our pressing global challenges – all while preserving your privacy by default.',
     icon: ISUserPlus
   },
   {
-    title: 'Delegate',
+    title: 'Decide',
     about:
-      'Increase your impact by becoming a delegate or choose one to represent your interests. Read delegate statements and continuously track their performance.',
-    icon: ISLightningBolt
-  },
-  {
-    title: 'Vote',
-    about:
-      'Create proposals and cast votes anonymously. Stay informed with AI summaries, analyze trends, and see real-time results – all in one place.',
+      'Create referendums, elect representatives, and cast votes anonymously. Decisions are turned into action using our official currency, the world drachma.',
     icon: ISCheck
-  },
-  {
-    title: 'Execute',
-    about:
-      'Turn decisions into action. After a proposal passes, create transactions from our treasury using our official currency, the world drachma.',
-    icon: ISPlay
   }
 ];
 </script>
@@ -45,7 +33,7 @@ const STEPS = [
       <UiContainer class="!max-w-screen-lg !px-0">
         <div class="grid grid-cols-1 lg:grid-cols-2 text-[19px] flow">
           <div v-for="(step, i) in STEPS" :key="i"
-            class="border-b border-r-0 last:border-b-0 lg:border-r lg:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(n+3)]:border-b-0">
+            class="border-b border-r-0 last:border-b-0 lg:border-r lg:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(n+1)]:border-b-0">
             <div class="px-4 py-5">
               <div class="flex space-x-2.5">
                 <component :is="step.icon" class="text-skin-link size-[24px] mb-4 inline-block" />

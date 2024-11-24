@@ -41,28 +41,10 @@ const FEATURES = [
     icon: ISAdjustments
   },
   {
-    title: 'Discourse integration',
-    about:
-      'View discussions directly within the app, enhancing context and facilitating informed decision-making.',
-    icon: ICDiscourse
-  },
-  {
     title: 'Shielded voting',
     about:
       'Keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
     icon: ISShieldCheck
-  },
-  {
-    title: 'AI proposal summary',
-    about:
-      'Help voters understand key points for informed decision-making with concise overviews of proposals.',
-    icon: ISSparkles
-  },
-  {
-    title: 'Your own branding',
-    about:
-      "Set up your own space and create a cohesive user experience aligned with your organization's identity.",
-    icon: ISColorSwatch
   }
 ];
 </script>
@@ -80,7 +62,7 @@ const FEATURES = [
       <UiContainer class="!max-w-screen-lg !px-0">
         <div class="grid grid-cols-1 text-[18px] lg:grid-cols-3">
           <div v-for="(feature, i) in FEATURES" :key="i"
-            class="px-4 py-5 border-b last:border-b-0 border-r-0 lg:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-child(n+7)]:border-b-0">
+            class="px-4 py-5 border-b last:border-b-0 border-r-0 lg:border-r lg:[&:nth-child(3n)]:border-r-0 lg:[&:nth-child(n+4)]:border-b-0">
             <component :is="feature.icon" class="text-skin-link size-[22px] mb-4" />
             <h3 class="text-skin-link font-heading !text-[18px] mb-2" v-text="feature.title" />
             <div v-text="feature.about" />
