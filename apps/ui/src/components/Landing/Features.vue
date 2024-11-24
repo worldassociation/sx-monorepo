@@ -10,13 +10,13 @@ const FEATURES = [
   {
     title: 'Democratic legitimacy',
     about:
-      'We ensure that participants are real and unique humans through innovative proof-of-personhood methods.',
+      'We ensure that all voters are real and unique humans through innovative proof of personhood methods.',
     icon: ISUserGroup
   },
   {
     title: 'Sustainable funding',
     about:
-      "The world drachma fuels innovation, supports members, and eliminates our need to rely on charity.",
+      "The world drachma supports the community and eliminates your need to rely on charity.",
     icon: ISBanknotes
   },
   {
@@ -28,7 +28,7 @@ const FEATURES = [
   {
     title: 'Flexible voting systems',
     about:
-      'Our platform supports various voting methods, and we select the most suitable one for each decision.',
+      'Supporting various voting methods so that the most suitable one can be chosen for each decision.',
     icon: ISAdjustments
   },
   {
@@ -40,7 +40,7 @@ const FEATURES = [
   {
     title: 'Secure voting',
     about:
-      'We keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
+      'Voter choices are encrypted until voting ends, preventing manipulation and promoting fair outcomes.',
     icon: ISShieldCheck
   }
 ];
@@ -51,7 +51,7 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Everything we need for global governance
+          Everything you need for global governance
         </h1>
       </div>
     </UiContainer>
