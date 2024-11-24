@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import ISCheck from '~icons/heroicons-solid/check';
+import ISLibrary from '~icons/heroicons-solid/building-library';
 import ISUserPlus from '~icons/heroicons-solid/user-plus';
 
 const STEPS = [
   {
     title: 'Join',
     about:
-      'Prove your personhood, set up your basic income, and join conversations on our pressing global challenges – all while preserving your privacy by default.',
+      'Prove your personhood, claim your basic income, and join conversations on global issues – all while preserving your privacy by default.',
     icon: ISUserPlus
   },
   {
-    title: 'Decide',
+    title: 'Govern',
     about:
-      'Create referendums, elect representatives, and cast votes anonymously. Decisions are turned into action using our official currency, the world drachma.',
-    icon: ISCheck
+      'Create referendums, run for office, or make your voice heard through voting. Decisions are turned into action with our official currency, the world drachma.',
+    icon: ISLibrary
   }
 ];
 </script>

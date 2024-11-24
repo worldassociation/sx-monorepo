@@ -1,49 +1,46 @@
 <script setup lang="ts">
-import ICDiscourse from '~icons/c/discourse';
 import ICGitHub from '~icons/c/github';
 import ISAdjustments from '~icons/heroicons-solid/adjustments';
 import ISBanknotes from '~icons/heroicons-solid/banknotes';
-import ISColorSwatch from '~icons/heroicons-solid/color-swatch';
 import ISCursorClick from '~icons/heroicons-solid/cursor-click';
 import ISShieldCheck from '~icons/heroicons-solid/shield-check';
-import ISSparkles from '~icons/heroicons-solid/sparkles';
 import ISUserGroup from '~icons/heroicons-solid/user-group';
 
 const FEATURES = [
   {
     title: 'Democratic legitimacy',
     about:
-      'Use our Global Voter ID system to ensure that only real and unique people participate in your initiatives.',
+      'We ensure that participants are real and unique humans through innovative proof-of-personhood methods.',
     icon: ISUserGroup
   },
   {
-    title: 'Costless polls and petitions',
+    title: 'Sustainable funding',
     about:
-      'Amplify your advocacy with unlimited polls and petitions, engaging your community like never before.',
-    icon: ISCursorClick
-  },
-  {
-    title: 'Community grants',
-    about:
-      "Receive funding to drive positive change and address humanity's most pressing global challenges.",
+      "The world drachma fuels innovation, supports members, and eliminates our need to rely on charity.",
     icon: ISBanknotes
   },
   {
-    title: 'Open-source software',
+    title: 'Radical transparency',
     about:
-      'Launch your campaigns on a transparent application that is free to use and free to improve.',
+      'Our open-source approach and transparent operations ensure accountability and capture-resistance.',
     icon: ICGitHub
   },
   {
-    title: 'Multiple voting systems',
+    title: 'Flexible voting systems',
     about:
-      'Choose the appropriate voting method for each decision or create a new one tailored to your needs.',
+      'Our platform supports various voting methods, and we select the most suitable one for each decision.',
     icon: ISAdjustments
   },
   {
-    title: 'Shielded voting',
+    title: 'Empowered advocacy',
     about:
-      'Keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
+      'We provide free tools for petitions and open letters to mobilize communities like never before.',
+    icon: ISCursorClick
+  },
+  {
+    title: 'Secure voting',
+    about:
+      'We keep voter choices confidential until voting ends, preventing manipulation and promoting fair outcomes.',
     icon: ISShieldCheck
   }
 ];
@@ -54,7 +51,7 @@ const FEATURES = [
     <UiContainer class="!max-w-screen-lg">
       <div class="pb-6 max-w-[600px]">
         <h1 class="mb-4 font-display !text-[36px] sm:!text-[44px]">
-          Everything you need to make a global impact
+          Everything we need for global governance
         </h1>
       </div>
     </UiContainer>
