@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import ISCheck from '~icons/heroicons-solid/check';
-import ISLightningBolt from '~icons/heroicons-solid/lightning-bolt';
-import ISPlay from '~icons/heroicons-solid/play';
 import ISUserPlus from '~icons/heroicons-solid/user-plus';
 
 const STEPS = [
@@ -60,14 +58,6 @@ const STEPS = [
   .step-2 {
     background-image: url('@/assets/site/flow-2-light.png');
   }
-
-  .step-3 {
-    background-image: url('@/assets/site/flow-3-light.png');
-  }
-
-  .step-4 {
-    background-image: url('@/assets/site/flow-4-light.png');
-  }
 }
 
 .dark {
@@ -78,14 +68,6 @@ const STEPS = [
 
     .step-2 {
       background-image: url('@/assets/site/flow-2-dark.png');
-    }
-
-    .step-3 {
-      background-image: url('@/assets/site/flow-3-dark.png');
-    }
-
-    .step-4 {
-      background-image: url('@/assets/site/flow-4-dark.png');
     }
   }
 }
