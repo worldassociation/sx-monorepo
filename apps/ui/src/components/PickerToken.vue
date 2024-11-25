@@ -7,7 +7,7 @@ import { ETH_CONTRACT } from '@/helpers/constants';
 import Multicaller from '@/helpers/multicaller';
 import { getProvider } from '@/helpers/provider';
 import { _n, shorten } from '@/helpers/utils';
-import { ChainId, NetworkID } from '@/types';
+import { ChainId } from '@/types';
 
 const props = defineProps<{
   searchValue: string;
@@ -15,7 +15,6 @@ const props = defineProps<{
   assets: Token[];
   address: string;
   network: ChainId;
-  networkId: NetworkID;
 }>();
 
 const emit = defineEmits<{
@@ -131,8 +130,8 @@ watch(
     <button v-for="(asset, i) in filteredAssets" :key="i" type="button"
       class="w-full px-3 py-2.5 border-b last:border-0 flex justify-between text-start" @click="handlePick(asset)">
       <div class="flex items-center min-w-0 pr-2">
-        <UiBadgeNetwork :id="networkId">
-          <UiStamp :id="`${networkId}:${asset.contractAddress}`" type="token" :size="32" />
+        <UiBadgeNetwork :chain-id="network">
+          <UiStamp :id="`eip155:${network}:${asset.contractAddress}`" type="token" :size="32" />
         </UiBadgeNetwork>
         <div class="flex flex-col ml-3 leading-5 min-w-0">
           <div class="text-skin-link" v-text="shorten(asset.symbol, 'symbol')" />

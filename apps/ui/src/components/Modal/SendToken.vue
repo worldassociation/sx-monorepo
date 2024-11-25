@@ -6,7 +6,7 @@ import { ETH_CONTRACT } from '@/helpers/constants';
 import { createSendTokenTransaction } from '@/helpers/transactions';
 import { clone } from '@/helpers/utils';
 import { getValidator } from '@/helpers/validation';
-import { ChainId, Contact, NetworkID, Transaction } from '@/types';
+import { ChainId, Contact, Transaction } from '@/types';
 
 const DEFAULT_FORM_STATE = {
   to: '',
@@ -26,7 +26,6 @@ const props = defineProps<{
   open: boolean;
   address: string;
   network: ChainId;
-  networkId: NetworkID;
   extraContacts?: Contact[];
   initialState?: any;
 }>();
@@ -242,7 +241,7 @@ watchEffect(async () => {
     </template>
     <template v-if="showPicker">
       <PickerToken v-if="pickerType === 'token'" :assets="allAssets" :address="address" :network="network"
-        :network-id="networkId" :loading="loading" :search-value="searchValue" @pick="
+        :loading="loading" :search-value="searchValue" @pick="
           form.token = $event;
         showPicker = false;
         " @add="handleAddCustomToken" />
@@ -259,8 +258,8 @@ watchEffect(async () => {
         <div class="s-label" v-text="'Token'" />
         <button type="button" class="s-input text-left h-[61px]" @click="handlePickerClick('token')">
           <div class="flex items-center">
-            <UiStamp v-if="currentToken" :id="`${networkId}:${currentToken.contractAddress}`" type="token" class="mr-2"
-              :size="20" />
+            <UiStamp v-if="currentToken" :id="`eip155:${network}:${currentToken.contractAddress}`" type="token"
+              class="mr-2" :size="20" />
             <div class="truncate">
               {{ currentToken?.symbol || 'Select token' }}
             </div>

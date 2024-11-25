@@ -16,7 +16,7 @@ const {
   fetchingDetails,
   message,
   executionTx,
-  executionNetwork,
+  executionTxUrl,
   finalizeProposalSending,
   executeProposalSending,
   executeQueuedProposalSending,
@@ -41,8 +41,7 @@ const network = computed(() => getNetwork(props.proposal.network));
     </div>
     <div v-else-if="executionTx">
       Proposal has been already executed at
-      <a class="inline-flex items-center" target="_blank" :href="executionNetwork.helpers.getExplorerUrl(executionTx, 'transaction')
-        ">
+      <a class="inline-flex items-center" target="_blank" :href="executionTxUrl || undefined">
         {{ shorten(executionTx) }}
         <IH-arrow-sm-right class="inline-block ml-1 -rotate-45" />
       </a>

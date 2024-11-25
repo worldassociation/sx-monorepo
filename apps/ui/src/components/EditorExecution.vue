@@ -112,7 +112,7 @@ watch(
   <div class="space-y-3">
     <div class="overflow-hidden border rounded-lg">
       <div v-if="treasury && network" class="w-full flex justify-between items-center px-4 py-3">
-        <UiBadgeNetwork :id="treasury.networkId" class="mr-3 shrink-0 size-fit" :class="{
+        <UiBadgeNetwork :chain-id="treasury.network" class="mr-3 shrink-0 size-fit" :class="{
           'opacity-40': disabled
         }">
           <UiStamp :id="treasury.wallet" type="avatar" :size="32" class="rounded-md" />
@@ -143,12 +143,12 @@ watch(
           </UiTooltip>
         </div>
       </div>
-      <template v-if="model.length > 0 && treasury && treasury.networkId">
+      <template v-if="model.length > 0 && treasury">
         <UiLabel label="Transactions" class="border-t" />
         <div>
           <Draggable v-model="model" handle=".handle" :item-key="() => undefined">
             <template #item="{ element: tx, index: i }">
-              <TransactionsListItem :tx="tx" :network-id="treasury.networkId">
+              <TransactionsListItem :tx="tx" :chain-id="treasury.network">
                 <template #left>
                   <div v-if="model.length > 1"
                     class="handle text-skin-link cursor-pointer opacity-50 hover:opacity-100">
@@ -194,16 +194,16 @@ watch(
     </div>
 
     <teleport to="#modal">
-      <ModalSendToken v-if="treasury && treasury.networkId" :open="modalOpen.sendToken" :address="treasury.wallet"
-        :network="treasury.network" :network-id="treasury.networkId" :extra-contacts="extraContacts"
-        :initial-state="modalState.sendToken" @close="modalOpen.sendToken = false" @add="addTx" />
-      <ModalSendNft v-if="treasury && treasury.networkId" :open="modalOpen.sendNft" :address="treasury.wallet"
-        :network="treasury.network" :extra-contacts="extraContacts" :initial-state="modalState.sendNft"
-        @close="modalOpen.sendNft = false" @add="addTx" />
-      <ModalStakeToken v-if="treasury && treasury.networkId" :open="modalOpen.stakeToken" :address="treasury.wallet"
-        :network="treasury.network" :network-id="treasury.networkId" :initial-state="modalState.stakeToken"
-        @close="modalOpen.stakeToken = false" @add="addTx" />
-      <ModalTransaction v-if="treasury && treasury.networkId" :open="modalOpen.contractCall" :network="treasury.network"
+      <ModalSendToken v-if="treasury" :open="modalOpen.sendToken" :address="treasury.wallet" :network="treasury.network"
+        :extra-contacts="extraContacts" :initial-state="modalState.sendToken" @close="modalOpen.sendToken = false"
+        @add="addTx" />
+      <ModalSendNft v-if="treasury" :open="modalOpen.sendNft" :address="treasury.wallet" :network="treasury.network"
+        :extra-contacts="extraContacts" :initial-state="modalState.sendNft" @close="modalOpen.sendNft = false"
+        @add="addTx" />
+      <ModalStakeToken v-if="treasury" :open="modalOpen.stakeToken" :address="treasury.wallet"
+        :network="treasury.network" :initial-state="modalState.stakeToken" @close="modalOpen.stakeToken = false"
+        @add="addTx" />
+      <ModalTransaction v-if="treasury" :open="modalOpen.contractCall" :network="treasury.network"
         :extra-contacts="extraContacts" :initial-state="modalState.contractCall" @close="modalOpen.contractCall = false"
         @add="addTx" />
     </teleport>
