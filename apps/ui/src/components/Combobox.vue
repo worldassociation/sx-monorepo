@@ -97,7 +97,7 @@ watch(model, () => {
             {{ definition.title }}
           </div>
         </div>
-        <ComboboxOptions class="w-full bg-skin-border border-t-skin-text/10 border shadow-xl overflow-hidden" :class="inline ? 'max-w-[80vw] sm:max-w-[300px] rounded-lg' : 'rounded-b-lg'
+        <ComboboxOptions class="w-full bg-skin-bg border shadow-xl overflow-hidden" :class="inline ? 'max-w-[80vw] sm:max-w-[300px] rounded-lg' : 'rounded-b-lg'
           ">
           <div class="max-h-[208px] overflow-y-auto">
             <div v-if="filteredOptions.length === 0 && query !== ''"
